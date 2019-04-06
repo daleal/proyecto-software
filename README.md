@@ -1,24 +1,34 @@
-# README
+# Grupo 28
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[Aplicación](https://salty-citadel-84152.herokuapp.com/)
 
-Things you may want to cover:
+## Changing the Gemfile or the Dockerfile
 
-* Ruby version
+```bash
+docker-compose run web bundle install
+docker-compose up --build
+```
 
-* System dependencies
+## Running the server (locally)
 
-* Configuration
+```bash
+docker-compose up
+```
 
-* Database creation
+## Stopping the server (locally)
 
-* Database initialization
+```bash
+docker-compose down
+```
 
-* How to run the test suite
+## Building the container image (Heroku Container Registry)
 
-* Services (job queues, cache servers, search engines, etc.)
+```bash
+heroku container:push web
+```
 
-* Deployment instructions
+## Releasing the container image (Heroku Container Registry)
 
-* ...
+```bash
+heroku container:release web
+```
