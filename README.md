@@ -1,32 +1,24 @@
-# Grupo 28
+# README
 
-## Changing the Gemfile or the Dockerfile
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-```bash
-docker-compose run web bundle install
-docker-compose up --build
-```
+Things you may want to cover:
 
-## Running the server (locally)
+* Ruby version
 
-```bash
-docker-compose up
-```
+* System dependencies
 
-## Stopping the server (locally)
+* Configuration
 
-```bash
-docker-compose down
-```
+* Database creation
 
-## Building the container image (Heroku Container Registry)
+* Database initialization
 
-```bash
-heroku container:push web
-```
+* How to run the test suite
 
-## Releasing the container image (Heroku Container Registry)
+* Services (job queues, cache servers, search engines, etc.)
 
-```bash
-heroku container:release web
-```
+* Deployment instructions
+
+* ...
