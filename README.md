@@ -2,6 +2,12 @@
 
 [Aplicación](https://salty-citadel-84152.herokuapp.com/)
 
+## Getting admin permision
+
+```bash
+sudo chown -R $USER:$USER .
+```
+
 ## Changing the Gemfile or the Dockerfile
 
 ```bash
