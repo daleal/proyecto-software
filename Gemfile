@@ -10,6 +10,7 @@ gem 'turbolinks',              '5.0.1'
 gem 'jbuilder',                '2.7.0'
 gem 'pg',                      '0.20.0'
 gem 'rubocop'
+gem 'devise'
 
 group :development, :test do
   gem 'byebug',  '9.0.6', platform: :mri
