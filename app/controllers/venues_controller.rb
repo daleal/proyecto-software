@@ -14,7 +14,7 @@ class VenuesController < ApplicationController
   def create
     @venue = Venue.new(venue_params)
     respond_to do |format|
-      if @venue.save:
+      if @venue.save
         format.html { redirect_to @venue, notice: '¡El campus ha sido creado con éxito!'}
       end
     end
