@@ -1,2 +1,5 @@
-<h1>Venues#new</h1>
-<p>Find me in app/views/venues/new.html.erb</p>
+<h1>Crear nuevo campus</h1>
+
+<%= render 'form', venue: @venue, submit_value: "Crear campus" %>
+
+<%= link_to 'Volver', venues_path %>

@@ -1,2 +1,19 @@
-<h1>Venues#show</h1>
-<p>Find me in app/views/venues/show.html.erb</p>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @venue.name %>
+</p>
+
+<p>
+  <strong>Dirección:</strong>
+  <%= @venue.address %>
+</p>
+
+<p>
+  <strong>Descripción:</strong>
+  <%= @venue.description %>
+</p>
+
+<%= link_to 'Editar', edit_venue_path(@venue) %> |
+<%= link_to 'Volver', venues_path %>
