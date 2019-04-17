@@ -1,17 +1,8 @@
 Rails.application.routes.draw do
-  get 'rooms/create'
 
-  get 'rooms/destroy'
+  resources :venues
 
-  get 'rooms/update'
-
-  get 'rooms/index'
-
-  get 'rooms/show'
-
-  get 'rooms/new'
-
-  get 'rooms/edit'
+  resources :rooms
 
   resources :courses
 
