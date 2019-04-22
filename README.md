@@ -1,11 +1,11 @@
 # Grupo 28
 
-[Aplicación](https://salty-citadel-84152.herokuapp.com/)
+[https://salty-citadel-84152.herokuapp.com/](https://salty-citadel-84152.herokuapp.com/)
 
-## Getting admin permision
+## Running Rubocop
 
 ```bash
-sudo chown -R $USER:$USER .
+docker-compose run web rubocop
 ```
 
 ## Changing the Gemfile or the Dockerfile
@@ -37,4 +37,10 @@ heroku container:push web
 
 ```bash
 heroku container:release web
+```
+
+## Getting admin permision
+
+```bash
+sudo chown -R $USER:$USER .
 ```
