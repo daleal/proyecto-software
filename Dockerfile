@@ -5,7 +5,7 @@ WORKDIR /myapp
 COPY Gemfile /myapp/Gemfile
 COPY Gemfile.lock /myapp/Gemfile.lock
 RUN bundle install
-RUN rails assets:precompole
+RUN rails assets:precompile
 COPY . /myapp
 
 # Add a script to be executed every time the container starts.
