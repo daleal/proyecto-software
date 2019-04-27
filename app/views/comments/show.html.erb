@@ -8,5 +8,5 @@
   <%= @comment.comment_date.strftime("%d/%m/%y: %H:%M:%S") %>
 </p>
 
-<%= link_to 'Editar', edit_comment_path(@comment) %> |
-<%= link_to 'Volver', comments_path %>
+<%= link_to 'Editar', edit_publication_comment_path(@publication, @comment) %> |
+<%= link_to 'Volver', publication_comments_path %>

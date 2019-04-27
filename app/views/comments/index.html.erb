@@ -14,9 +14,9 @@
       <tr>
         <td><%= comment.content %></td>
         <td><%= comment.comment_date.strftime("%d/%m/%y: %H:%M:%S") %></td>
-        <td><%= link_to 'Mostrar', comment %></td>
-        <td><%= link_to 'Editar', edit_comment_path(comment) %></td>
-        <td><%= link_to 'Eliminar', comment, method: :delete, data: { confirm: '¿Estás seguro?' } %></td>
+        <td><%= link_to 'Mostrar', publication_comment_path(@publication, comment) %></td>
+        <td><%= link_to 'Editar', edit_publication_comment_path(@publication, comment) %></td>
+        <td><%= link_to 'Eliminar', publication_comment_path(@publication, comment), method: :delete, data: { confirm: '¿Estás seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +24,4 @@
 
 <br>
 
-<%= link_to 'Crear nuevo', new_comment_path %>
+<%= link_to 'Crear nuevo', new_publication_comment_path %>

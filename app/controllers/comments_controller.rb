@@ -1,29 +1,34 @@
 class CommentsController < ApplicationController
   def index
-    @comments = Comment.all
+    @publication = Publication.find(params[:publication_id])
+    @comments = Comment.where(:publication_id => params[:publication_id])
   end
 
   def show
+    @publication = Publication.find(params[:publication_id])
     @comment = Comment.find(params[:id])
   end
 
   def new
+    @publication = Publication.find(params[:publication_id])
     @comment = Comment.new
   end
 
   def create
     comment_data = comment_params
     comment_data[:comment_date] = Time.current
-    @comment = Comment.new(comment_data)
+    @publication = Publication.find(params[:publication_id])
+    @comment = @publication.comments.new(comment_data)
     if @comment.save
       flash[:success] = "Se ha creado un comentario correctamente!"
     else
       flash[:warning] = "No se ha podido crear el comentario!"
     end
-    redirect_to comments_path
+    redirect_to publication_comments_path
   end
 
   def edit
+    @publication = Publication.find(params[:publication_id])
     @comment = Comment.find(params[:id])
   end
 
@@ -34,14 +39,14 @@ class CommentsController < ApplicationController
     else
       flash[:warning] = "No se ha podido editar el comentario!"
     end
-    redirect_to comments_path
+    redirect_to publication_comments_path
   end
 
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy
     flash[:info] = "Se ha eliminado un comentario correctamente"
-    redirect_to comments_path
+    redirect_to publication_comments_path
   end
 
   private

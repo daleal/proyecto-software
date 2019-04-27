@@ -13,5 +13,6 @@
   <%= @publication.publication_date.strftime("%d/%m/%y: %H:%M:%S") %>
 </p>
 
+<%= link_to 'Comentarios', publication_comments_path(@publication) %> |
 <%= link_to 'Editar', edit_publication_path(@publication) %> |
 <%= link_to 'Volver', publications_path %>
