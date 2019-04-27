@@ -1,2 +1,20 @@
-<h1>Rooms#edit</h1>
-<p>Find me in app/views/rooms/edit.html.erb</p>
+<h1>Editar sala</h1>
+
+<%= form_for @room do |f| %>
+
+  <div class="field">
+    <%= f.text_field :letter, placeholder: 'Letra' %>
+  </div>
+
+  <div class="field">
+    <%= f.text_field :number, placeholder: 'Número' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Editar sala" %>
+  </div>
+
+<% end %>
+
+<%= link_to 'Mostrar', @room %> |
+<%= link_to 'Volver', rooms_path %>

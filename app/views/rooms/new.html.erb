@@ -1,2 +1,19 @@
-<h1>Rooms#new</h1>
-<p>Find me in app/views/rooms/new.html.erb</p>
+<h1>Crear sala</h1>
+
+<%= form_for @room do |f| %>
+
+  <div class="field">
+    <%= f.text_field :letter, placeholder: 'Letra' %>
+  </div>
+
+  <div class="field">
+    <%= f.text_field :number, placeholder: 'Número' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Crear sala" %>
+  </div>
+
+<% end %>
+
+<%= link_to 'Volver', rooms_path %>

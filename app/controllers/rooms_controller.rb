@@ -12,8 +12,14 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @room = Room.new
-    @room.save
+    @room = Room.new(room_params)
+    if @room.save
+      flash[:success] = "Se ha creado una sala llamada #{@room.letter}"
+                        "#{@room.number} correctamente!"
+    else
+      flash[:warning] = "No se ha podido crear la sala!"
+    end
+    redirect_to rooms_path
   end
 
   def edit
@@ -22,13 +28,26 @@ class RoomsController < ApplicationController
 
   def update
     @room = Room.find(params[:id])
-    if @room.update_attributres
-      # Hacer algo
+    if @room.update_attributes(room_params)
+      flash[:success] = "Se ha editado la sala llamada #{@room.letter}"
+                        "#{@room.number} correctamente!"
+    else
+      flash[:warning] = "No se ha podido editar la sala!"
     end
+    redirect_to rooms_path
   end
 
   def destroy
     @room = Room.find(params[:id])
     @room.destroy
+    flash[:info] = "Se ha eliminado una sala correctamente"
+    redirect_to rooms_path
   end
+
+  private
+
+    def room_params
+      data = params.require(:room).permit(:letter, :number)
+    end
+
 end
