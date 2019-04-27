@@ -14,7 +14,7 @@ class RoomsController < ApplicationController
   def create
     @room = Room.new(room_params)
     if @room.save
-      flash[:success] = "Se ha creado una sala llamada #{@room.letter}"
+      flash[:success] = "Se ha creado una sala llamada #{@room.letter}"\
                         "#{@room.number} correctamente!"
     else
       flash[:warning] = "No se ha podido crear la sala!"
@@ -29,7 +29,7 @@ class RoomsController < ApplicationController
   def update
     @room = Room.find(params[:id])
     if @room.update_attributes(room_params)
-      flash[:success] = "Se ha editado la sala llamada #{@room.letter}"
+      flash[:success] = "Se ha editado la sala llamada #{@room.letter}"\
                         "#{@room.number} correctamente!"
     else
       flash[:warning] = "No se ha podido editar la sala!"
@@ -46,8 +46,8 @@ class RoomsController < ApplicationController
 
   private
 
-    def room_params
-      data = params.require(:room).permit(:letter, :number)
-    end
+  def room_params
+    params.require(:room).permit(:letter, :number)
+  end
 
 end

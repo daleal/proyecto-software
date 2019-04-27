@@ -48,7 +48,8 @@ class PublicationsController < ApplicationController
 
   private
 
-    def publication_params
-      data = params.require(:publication).permit(:title, :description)
-    end
+  def publication_params
+    params.require(:publication).permit(:title, :description)
+  end
+
 end

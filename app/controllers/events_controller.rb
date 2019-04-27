@@ -14,7 +14,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     if @event.save
-      flash[:success] = "Se ha creado un evento del tipo "
+      flash[:success] = "Se ha creado un evento del tipo "\
                         "#{@event.category} correctamente!"
     else
       flash[:warning] = "No se ha podido crear el evento!"
@@ -29,7 +29,7 @@ class EventsController < ApplicationController
   def update
     @event = Event.find(params[:id])
     if @event.update_attributes(event_params)
-      flash[:success] = "Se ha editado un evento del tipo "
+      flash[:success] = "Se ha editado un evento del tipo "\
                         "#{@event.category} correctamente!"
     else
       flash[:warning] = "No se ha podido editar el evento!"
@@ -46,8 +46,8 @@ class EventsController < ApplicationController
 
   private
 
-    def event_params
-      data = params.require(:event).permit(:category, :description)
-    end
+  def event_params
+    params.require(:event).permit(:category, :description)
+  end
 
 end

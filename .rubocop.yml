@@ -19,6 +19,22 @@ AllCops:
     - 'app/mailers/*'  # POR AHORA!!
     - 'test/**/*'      # POR AHORA!!
 
+Documentation:
+  Enabled: false
+
+Layout/EmptyLinesAroundClassBody:
+  EnforcedStyle: ending_only
+
+# No space around method parameter definition
+Layout/SpaceAroundEqualsInParameterDefault:
+  EnforcedStyle: no_space
+
+Layout/SpaceInsideBlockBraces:
+  # The space here provides no real gain in readability while consuming
+  # horizontal space that could be used for a better parameter name.
+  # Also {| differentiates better from a hash than { | does.
+  SpaceBeforeBlockParameters: false
+
 Metrics/LineLength:
   Max: 80
 
@@ -26,6 +42,9 @@ Metrics/LineLength:
 # the code easier to read (by naming things), but can also clutter the class
 Metrics/MethodLength:
   Max: 20
+
+Rails/ActiveRecordAliases:
+  Enabled: false
 
 # Let coder put empty method definition in 2 lines instead of 1
 Style/EmptyMethod:
@@ -35,19 +54,12 @@ Style/EmptyMethod:
 Style/GuardClause:
   Enabled: false
 
-# No space around method parameter definition
-Style/SpaceAroundEqualsInParameterDefault:
-  EnforcedStyle: no_space
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
 
 # We do not need to support Ruby 1.9, so this is good to use.
 Style/SymbolArray:
   Enabled: true
-
-Style/SpaceInsideBlockBraces:
-  # The space here provides no real gain in readability while consuming
-  # horizontal space that could be used for a better parameter name.
-  # Also {| differentiates better from a hash than { | does.
-  SpaceBeforeBlockParameters: false
 
 # Enforcing the names of variables? To single letter ones? Just no.
 Style/SingleLineBlockParams:

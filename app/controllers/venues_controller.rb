@@ -15,7 +15,10 @@ class VenuesController < ApplicationController
     @venue = Venue.new(venue_params)
     respond_to do |format|
       if @venue.save
-        format.html { redirect_to @venue, notice: '¡El campus ha sido creado con éxito!'}
+        format.html do
+          redirect_to @venue, notice: "¡El campus ha sido "\
+                                      "creado con éxito!"
+        end
       end
     end
   end
@@ -28,7 +31,10 @@ class VenuesController < ApplicationController
     @venue = Venue.find(params[:id])
     respond_to do |format|
       if @venue.update(venue_params)
-        format.html { redirect_to @venue, notice: '¡El campus ha sido editado con éxito!' }
+        format.html do
+          redirect_to @venue, notice: "¡El campus ha sido "\
+                                      "editado con éxito!"
+        end
       end
     end
   end
@@ -37,13 +43,17 @@ class VenuesController < ApplicationController
     @venue = Venue.find(params[:id])
     @venue.destroy
     respond_to do |format|
-      format.html { redirect_to venues_url, notice: '¡El campus ha sido eliminado con éxito!'}
+      format.html do
+        redirect_to venues_url, notice: "¡El campus ha sido "\
+                                        "eliminado con éxito!"
+      end
     end
   end
 
   private
 
-    def venue_params
-      params.require(:venue).permit(:name, :address, :description)
-    end
+  def venue_params
+    params.require(:venue).permit(:name, :address, :description)
+  end
+
 end

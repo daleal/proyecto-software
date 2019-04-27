@@ -14,8 +14,8 @@ class CoursesController < ApplicationController
   def create
     @course = Course.new(course_params)
     if @course.save
-      flash[:success] = "Se ha creado un ramo con el nombre "
-                      "#{@course.name} correctamente!"
+      flash[:success] = "Se ha creado un ramo con el nombre "\
+                        "#{@course.name} correctamente!"
     else
       flash[:warning] = "No se ha podido crear el ramo!"
     end
@@ -29,8 +29,8 @@ class CoursesController < ApplicationController
   def update
     @course = Course.find(params[:id])
     if @course.update_attributes(course_params)
-      flash[:success] = "Se ha editado el ramo con el nombre "
-                      "#{@course.name} correctamente!"
+      flash[:success] = "Se ha editado el ramo con el nombre "\
+                        "#{@course.name} correctamente!"
     else
       flash[:warning] = "No se ha podido editar el ramo!"
     end
@@ -46,8 +46,8 @@ class CoursesController < ApplicationController
 
   private
 
-    def course_params
-      data = params.require(:course).permit(:name, :initials, :teacher_name)
-    end
+  def course_params
+    params.require(:course).permit(:name, :initials, :teacher_name)
+  end
 
 end
