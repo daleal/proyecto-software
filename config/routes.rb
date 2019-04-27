@@ -9,8 +9,10 @@ Rails.application.routes.draw do
   resources :events
 
   resources :rooms
-
+  
   resources :publications
+
+  resources :comments
 
   root 'static_pages#home'
 end

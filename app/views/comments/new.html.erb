@@ -1,0 +1,15 @@
+<h1>Crear Comentario</h1>
+
+<%= form_for @comment do |f| %>
+
+  <div class="field">
+    <%= f.text_area :content, placeholder: 'Contenido' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Crear Comentario" %>
+  </div>
+
+<% end %>
+
+<%= link_to 'Volver', comments_path %>

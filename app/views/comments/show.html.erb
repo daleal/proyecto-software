@@ -1,0 +1,12 @@
+<p>
+  <strong>Contenido:</strong>
+  <%= @comment.content %>
+</p>
+
+<p>
+  <strong>Fecha de creación:</strong>
+  <%= @comment.comment_date.strftime("%d/%m/%y: %H:%M:%S") %>
+</p>
+
+<%= link_to 'Editar', edit_comment_path(@comment) %> |
+<%= link_to 'Volver', comments_path %>
