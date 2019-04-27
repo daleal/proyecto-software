@@ -1,0 +1,19 @@
+<h1>Crear nuevo evento</h1>
+
+<%= form_for @event do |f| %>
+
+  <div class="field">
+    <%= f.text_field :category, placeholder: 'Categoría' %>
+  </div>
+
+  <div class="field">
+    <%= f.text_field :description, placeholder: 'Descripción' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Crear Evento" %>
+  </div>
+
+<% end %>
+
+<%= link_to 'Volver', events_path %>

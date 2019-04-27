@@ -1,0 +1,12 @@
+<p>
+  <strong>Categoría:</strong>
+  <%= @event.category %>
+</p>
+
+<p>
+  <strong>Descripción:</strong>
+  <%= @event.description %>
+</p>
+
+<%= link_to 'Editar', edit_event_path(@event) %> |
+<%= link_to 'Volver', events_path %>
