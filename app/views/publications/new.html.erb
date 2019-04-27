@@ -1,0 +1,19 @@
+<h1>Crear Publicación</h1>
+
+<%= form_for @publication do |f| %>
+
+  <div class="field">
+    <%= f.text_field :title, placeholder: 'Título' %>
+  </div>
+
+  <div class="field">
+    <%= f.text_area :description, placeholder: 'Descripción' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Crear Publicación" %>
+  </div>
+
+<% end %>
+
+<%= link_to 'Volver', publications_path %>

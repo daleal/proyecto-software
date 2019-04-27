@@ -10,5 +10,7 @@ Rails.application.routes.draw do
 
   resources :rooms
 
+  resources :publications
+
   root 'static_pages#home'
 end

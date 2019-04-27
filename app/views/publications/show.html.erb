@@ -1,0 +1,17 @@
+<p>
+  <strong>Título:</strong>
+  <%= @publication.title %>
+</p>
+
+<p>
+  <strong>Descripción:</strong>
+  <%= @publication.description %>
+</p>
+
+<p>
+  <strong>Fecha de creación:</strong>
+  <%= @publication.publication_date.strftime("%d/%m/%y: %H:%M:%S") %>
+</p>
+
+<%= link_to 'Editar', edit_publication_path(@publication) %> |
+<%= link_to 'Volver', publications_path %>
