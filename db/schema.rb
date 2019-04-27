@@ -47,7 +47,6 @@ ActiveRecord::Schema.define(version: 20190409163759) do
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.string "letter"
     t.integer "number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
