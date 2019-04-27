@@ -1,2 +1,24 @@
-<h1>Courses#edit</h1>
-<p>Find me in app/views/courses/edit.html.erb</p>
+<h1>Editar ramo</h1>
+
+<%= form_for @course do |f| %>
+
+  <div class="field">
+    <%= f.text_field :name, placeholder: 'Nombre' %>
+  </div>
+
+  <div class="field">
+    <%= f.text_field :initials, placeholder: 'Iniciales' %>
+  </div>
+
+  <div class="field">
+    <%= f.text_field :teacher_name, placeholder: 'Nombre del Profesor' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Editar ramo" %>
+  </div>
+
+<% end %>
+
+<%= link_to 'Mostrar', @course %> |
+<%= link_to 'Volver', courses_path %>

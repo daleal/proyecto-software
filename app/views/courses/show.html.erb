@@ -1,0 +1,17 @@
+<p>
+  <strong>Nombre:</strong>
+  <%= @course.name %>
+</p>
+
+<p>
+  <strong>Iniciales:</strong>
+  <%= @course.initials %>
+</p>
+
+<p>
+  <strong>Nombre del Profesor:</strong>
+  <%= @course.teacher_name %>
+</p>
+
+<%= link_to 'Editar', edit_course_path(@course) %> |
+<%= link_to 'Volver', courses_path %>
