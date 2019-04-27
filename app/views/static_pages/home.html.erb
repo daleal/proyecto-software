@@ -1,4 +1,24 @@
-<h1>MIPS Pal Que Lee</h1>
+
+<%= render 'basic_menu', object_title: 'Campuses',
+                         objects_value: 'Ver campuses', objects_path: venues_path,
+                         new_object_value: 'Nuevo campus', new_object_path: new_venue_path %>
 
 
-<%= image_tag asset_path("nokogiri.jpeg"), alt: "Nokogiri San" %>
+<%= render 'basic_menu', object_title: 'Eventos',
+                         objects_value: 'Ver eventos', objects_path: events_path,
+                         new_object_value: 'Nuevo evento', new_object_path: new_event_path %>
+
+
+<%= render 'basic_menu', object_title: 'Salas de estudio',
+                         objects_value: 'Ver salas de estudio', objects_path: rooms_path,
+                         new_object_value: 'Nueva sala de estudio', new_object_path: new_room_path %>
+
+
+<%= render 'basic_menu', object_title: 'Publicaciones',
+                         objects_value: 'Ver publicaciones', objects_path: publications_path,
+                         new_object_value: 'Nueva publicación', new_object_path: new_publication_path %>
+
+
+<%= render 'basic_menu', object_title: 'Ramos',
+                         objects_value: 'Ver ramos', objects_path: courses_path,
+                         new_object_value: 'Nuevo ramo', new_object_path: new_course_path %>
