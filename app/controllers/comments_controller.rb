@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   def index
     @publication = Publication.find(params[:publication_id])
-    @comments = Comment.where(:publication_id => params[:publication_id])
+    @comments = Comment.where(publication_id: params[:publication_id])
   end
 
   def show
