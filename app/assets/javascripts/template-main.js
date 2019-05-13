@@ -10,6 +10,7 @@
 		$body = $('body'),
 		$wrapper = $('#wrapper'),
 		$header = $('#header'),
+		$alert = $('#alert'),
 		$banner = $('#banner');
 
 	// Breakpoints.
@@ -212,6 +213,12 @@
 			});
 
 		}
+
+	// Alerts.
+		$alert.each(function() {
+			var $this = $(this);
+			$this._parallax(0.3);
+		});
 
 	// Banner.
 		$banner.each(function() {

@@ -20,7 +20,7 @@
   <ul class="actions stacked">
     <% if user_signed_in? %>
       <li><%= link_to "Editar Perfil", edit_user_registration_path, class: "button primary fit" %></li>
-      <li><%= link_to "Cerrar Sesión", destroy_user_session_path, method: :delete, class: "button fit" %></li>
+      <li><%= link_to "Cerrar Sesión", destroy_user_session_path, class: "button fit" %></li>
     <% else %>
       <li><%= link_to "Regístrate!", new_user_registration_url, class: "button primary fit" %></li>
       <li><%= link_to "Iniciar Sesión", new_user_session_url, class: "button fit" %></li>
