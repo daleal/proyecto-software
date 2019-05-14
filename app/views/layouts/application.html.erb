@@ -1,25 +1,46 @@
 <!DOCTYPE html>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
   <head>
     <title>Myapp</title>
     <%= csrf_meta_tags %>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="is-preload">
 
-    <% flash.each do |message_type, message| %>
-      <% if notice %>
-        <p class="alert alert-success"><%= notice %></p>
-      <% elsif alert %>
-        <p class="alert alert-danger"><%= alert %></p>
-      <% else %>
-        <div class="alert alert-<%= message_type %>"><%= message %></div>
+    <div id="wrapper">
+
+      <%= render 'layouts/header' %>
+
+      <% flash.each do |message_type, message| %>
+        <% if notice %>
+          <p class="alert alert-success"><%= notice %></p>
+        <% elsif alert %>
+          <p class="alert alert-danger"><%= alert %></p>
+        <% else %>
+          <div class="alert alert-<%= message_type %>"><%= message %></div>
+        <% end %>
       <% end %>
-    <% end %>
 
-    <%= yield %>
+      <%= yield %>
+
+    </div>
+
+    <%= javascript_include_tag "jquery.scrolly.min.js" %>
+    <%= javascript_include_tag "jquery.scrollex.min.js" %>
+    <%= javascript_include_tag "browser.min.js" %>
+    <%= javascript_include_tag "breakpoints.min.js" %>
+    <%= javascript_include_tag "util.js" %>
+    <%= javascript_include_tag "template-main.js" %>
+
   </body>
 </html>

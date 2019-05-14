@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @publication = Publication.find(params[:publication_id])
     @comments = Comment.where(publication_id: params[:publication_id])

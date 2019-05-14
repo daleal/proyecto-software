@@ -1,29 +1,94 @@
+<section id="banner" class="major">
+  <div class="inner">
+    <header class="major">
+      <h1>Somos lejos los más secos</h1>
+    </header>
+    <div class="content">
+      <p>
+      Aliquip occaecat quis consectetur veniam irure officia <br>
+      ad qui mollit labore sint consectetur.
+      </p>
+      <ul class="actions">
+        <li><%= link_to "Baja un poco", "#one", class: "button next scrolly" %></li>
+      </ul>
+    </div>
+  </div>
+</section>
 
+<div id="main">
+  <!-- One -->
+    <section id="one" class="tiles">
+      <article>
+        <span class="image">
+          <%= image_tag("pic01.jpg") %>
+        </span>
+        <header class="major">
+          <h3><%= link_to "Campuses", venues_url, class: "link" %></h3>
+          <p>Ipsum dolor sit amet</p>
+        </header>
+      </article>
+      <article>
+        <span class="image">
+          <%= image_tag("pic02.jpg") %>
+        </span>
+        <header class="major">
+          <h3><%= link_to "Eventos", events_url, class: "link" %></h3>
+          <p>feugiat amet tempus</p>
+        </header>
+      </article>
+      <article>
+        <span class="image">
+          <%= image_tag("pic03.jpg") %>
+        </span>
+        <header class="major">
+          <h3><%= link_to "Salas de Estudio", rooms_url, class: "link" %></h3>
+          <p>Lorem etiam nullam</p>
+        </header>
+      </article>
+      <article>
+        <span class="image">
+          <%= image_tag("pic04.jpg") %>
+        </span>
+        <header class="major">
+          <h3><%= link_to "Publicaciones", publications_url, class: "link" %></h3>
+          <p>Nisl sed aliquam</p>
+        </header>
+      </article>
+      <article>
+        <span class="image">
+          <%= image_tag("pic05.jpg") %>
+        </span>
+        <header class="major">
+          <h3><%= link_to "Ramos", courses_url, class: "link" %></h3>
+          <p>Ipsum dolor sit amet</p>
+        </header>
+      </article>
+      <article>
+        <span class="image">
+          <%= image_tag("pic06.jpg") %>
+        </span>
+        <header class="major">
+          <% if user_signed_in? %>
+            <h3><%= link_to "Editar Perfil", edit_user_registration_path, class: "link" %></h3>
+          <% else %>
+            <h3><%= link_to "Regístrate!", new_user_registration_url, class: "link" %></h3>
+          <% end %>
+          <p>Feugiat amet tempus</p>
+        </header>
+      </article>
+    </section>
 
-<%= render 'basic_menu', object_title: 'Campuses',
-                         objects_value: 'Ver campuses', objects_path: venues_path,
-                         new_object_value: 'Nuevo campus', new_object_path: new_venue_path %>
+  <!-- Two -->
+    <section id="two">
+      <div class="inner">
+        <header class="major">
+          <h2>Massa libero</h2>
+        </header>
+        <p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet pharetra et feugiat tempus.</p>
+        <ul class="actions">
+          <li><a href="landing.html" class="button next">Get Started</a></li>
+        </ul>
+      </div>
+    </section>
 
-
-<%= render 'basic_menu', object_title: 'Eventos',
-                         objects_value: 'Ver eventos', objects_path: events_path,
-                         new_object_value: 'Nuevo evento', new_object_path: new_event_path %>
-
-
-<%= render 'basic_menu', object_title: 'Salas de estudio',
-                         objects_value: 'Ver salas de estudio', objects_path: rooms_path,
-                         new_object_value: 'Nueva sala de estudio', new_object_path: new_room_path %>
-
-
-<%= render 'basic_menu', object_title: 'Publicaciones',
-                         objects_value: 'Ver publicaciones', objects_path: publications_path,
-                         new_object_value: 'Nueva publicación', new_object_path: new_publication_path %>
-
-
-<%= render 'basic_menu', object_title: 'Ramos',
-                         objects_value: 'Ver ramos', objects_path: courses_path,
-                         new_object_value: 'Nuevo ramo', new_object_path: new_course_path %>
-
-<br /><br /><br /><br /><br /><br /><br /><br />
-
-<%= link_to 'Editar perfil', edit_user_registration_path %>
+</div>
