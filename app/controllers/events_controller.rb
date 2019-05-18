@@ -16,7 +16,7 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-    event_data[:created_by] = current_user.email
+    @event.created_by = current_user.email
     if @event.save
       flash[:success] = "Se ha creado un evento del tipo "\
                         "#{@event.category} correctamente."

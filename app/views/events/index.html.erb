@@ -16,13 +16,13 @@
         <td><%= event.category %></td>
         <td><%= event.description %></td>
         <td><%= event.created_by %></td>
+        <td><%= link_to 'Mostrar', event %></td>
         <td><%= if (event.created_by == current_user.email) || current_user.administrator?
                   link_to 'Editar', edit_event_path(event)
                 end %></td>
         <td><%= if (event.created_by == current_user.email) || current_user.administrator?
                   link_to 'Eliminar', event, method: :delete, data: { confirm: '¿Estás seguro?' }
                 end %></td>
-        <td><%= link_to 'Eliminar', event, method: :delete, data: { confirm: '¿Estás seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>

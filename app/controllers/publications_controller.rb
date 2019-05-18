@@ -3,14 +3,17 @@ class PublicationsController < ApplicationController
   before_action :access, only: %i[update destroy]
 
   def index
-    @publications = Publication.all
+    @event = Event.find(params[:event_id])
+    @publications = Publication.where(event_id: params[:event_id])
   end
 
   def show
+    @event = Event.find(params[:event_id])
     @publication = Publication.find(params[:id])
   end
 
   def new
+    @event = Event.find(params[:event_id])
     @publication = Publication.new
   end
 
@@ -18,6 +21,7 @@ class PublicationsController < ApplicationController
     publication_data = publication_params
     publication_data[:publication_date] = Time.current
     publication_data[:created_by] = current_user.email
+    @event = Event.find(params[:event_id])
     @publication = Publication.new(publication_data)
 
     if @publication.save
@@ -31,6 +35,7 @@ class PublicationsController < ApplicationController
   end
 
   def edit
+    @event = Event.find(params[:event_id])
     @publication = Publication.find(params[:id])
   end
 
