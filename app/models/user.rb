@@ -4,4 +4,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :rememberable, :validatable
 
+  enum role: %i[common administrator]
+  after_initialize :set_default_role, :if => :new_record?
+
+  private
+
+  def set_default_role
+    self.role ||= :common
+  end
+
 end

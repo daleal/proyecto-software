@@ -8,5 +8,10 @@
   <%= @comment.comment_date.strftime("%d/%m/%y: %H:%M:%S") %>
 </p>
 
-<%= link_to 'Editar', edit_publication_comment_path(@publication, @comment) %> |
+<%=
+  if (@comment.created_by == current_user.email) || current_user.administrator?
+    link_to 'Editar', edit_publication_comment_path(@publication, @comment)
+  end
+%>
+
 <%= link_to 'Volver', publication_comments_path %>

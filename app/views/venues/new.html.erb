@@ -1,5 +1,23 @@
 <h1>Crear nuevo campus</h1>
 
-<%= render 'form', venue: @venue, submit_value: "Crear campus" %>
+<%= form_for @venue do |f| %>
+
+  <div class="field">
+    <%= f.text_field :name, placeholder: 'Nombre' %>
+  </div>
+
+  <div class="field">
+    <%= f.text_field :address, placeholder: 'Dirección' %>
+  </div>
+
+  <div class="field">
+    <%= f.text_field :description, placeholder: 'Descripción' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Crear Campus" %>
+  </div>
+
+<% end %>
 
 <%= link_to 'Volver', venues_path %>

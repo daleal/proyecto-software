@@ -1,6 +1,24 @@
 <h1>Editar campus</h1>
 
-<%= render 'form', venue: @venue, submit_value: "Editar campus" %>
+<%= form_for @venue do |f| %>
+
+  <div class="field">
+    <%= f.text_field :name, placeholder: 'Nombre' %>
+  </div>
+
+  <div class="field">
+    <%= f.text_field :address, placeholder: 'Dirección' %>
+  </div>
+
+  <div class="field">
+    <%= f.text_field :description, placeholder: 'Descripción' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Editar Campus" %>
+  </div>
+
+<% end %>
 
 <%= link_to 'Mostrar', @venue %> |
 <%= link_to 'Volver', venues_path %>

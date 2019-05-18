@@ -1,5 +1,6 @@
 class PublicationsController < ApplicationController
   before_action :authenticate_user!
+  before_action :access, only: %i[update destroy]
 
   def index
     @publications = Publication.all
@@ -16,13 +17,16 @@ class PublicationsController < ApplicationController
   def create
     publication_data = publication_params
     publication_data[:publication_date] = Time.current
+    publication_data[:created_by] = current_user.email
     @publication = Publication.new(publication_data)
+
     if @publication.save
       flash[:success] = "Se ha creado una publicación con el título "\
-                        "#{@publication.title} correctamente!"
+                        "#{@publication.title} correctamente."
     else
-      flash[:warning] = "No se ha podido crear la publicación!"
+      flash[:warning] = "No se ha podido crear la publicación."
     end
+
     redirect_to publications_path
   end
 
@@ -32,19 +36,25 @@ class PublicationsController < ApplicationController
 
   def update
     @publication = Publication.find(params[:id])
-    if @publication.update_attributes(publication_params)
-      flash[:success] = "Se ha editado la publicación con el título "\
-                        "#{@publication.title} correctamente!"
-    else
-      flash[:warning] = "No se ha podido editar la publicación!"
+    if (@publication.created_by == current_user.email) || \
+       current_user.administrator?
+      if @publication.update_attributes(publication_params)
+        flash[:success] = "Se ha editado la publicación con el título "\
+                          "#{@publication.title} correctamente."
+      else
+        flash[:warning] = "No se ha podido editar la publicación."
+      end
     end
     redirect_to publications_path
   end
 
   def destroy
     @publication = Publication.find(params[:id])
-    @publication.destroy
-    flash[:info] = "Se ha eliminado una publicación correctamente"
+    if (@publication.created_by == current_user.email) || \
+       current_user.administrator?
+      @publication.destroy
+      flash[:success] = "Se ha eliminado la publicación correctamente."
+    end
     redirect_to publications_path
   end
 
@@ -52,6 +62,15 @@ class PublicationsController < ApplicationController
 
   def publication_params
     params.require(:publication).permit(:title, :description)
+  end
+
+  def access
+    @publication = Publication.find(params[:id])
+    unless (@publication.created_by == current_user.email) || \
+           current_user.administrator?
+      flash[:warning] = "No tienes permiso para ejecutar esta acción."
+      redirect_to publications_path
+    end
   end
 
 end

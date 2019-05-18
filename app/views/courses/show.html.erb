@@ -13,5 +13,18 @@
   <%= @course.teacher_name %>
 </p>
 
-<%= link_to 'Editar', edit_course_path(@course) %> |
+<%=
+  if current_user.administrator? || @is_moderator
+    link_to 'Revisar solicitudes de moderador', course_moderator_requests_path(@course)
+  else
+    link_to 'Solicitar ser moderador', new_course_moderator_request_path(@course, @is_moderator)
+  end
+%>
+
+<%=
+  if current_user.administrator?
+    link_to 'Editar', edit_course_path(@course)
+  end
+%>
+
 <%= link_to 'Volver', courses_path %>

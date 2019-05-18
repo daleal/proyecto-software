@@ -17,8 +17,12 @@
         <td><%= course.initials %></td>
         <td><%= course.teacher_name %></td>
         <td><%= link_to 'Mostrar', course %></td>
-        <td><%= link_to 'Editar', edit_course_path(course) %></td>
-        <td><%= link_to 'Eliminar', course, method: :delete, data: { confirm: '¿Estás seguro?' } %></td>
+        <td><%= if current_user.administrator?
+                  link_to 'Editar', edit_course_path(course)
+                end %></td>
+        <td><%= if current_user.administrator?
+                  link_to 'Eliminar', course, method: :delete, data: { confirm: '¿Estás seguro?' }
+                end %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +30,8 @@
 
 <br>
 
-<%= link_to 'Crear nuevo', new_course_path %>
+<%=
+  if current_user.administrator?
+    link_to 'Crear nuevo', new_course_path
+  end
+%>
