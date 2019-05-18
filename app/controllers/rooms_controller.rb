@@ -49,7 +49,7 @@ class RoomsController < ApplicationController
   private
 
   def room_params
-    params.require(:room).permit(:number)
+    params.require(:room).permit(:number, :venue_id)
   end
 
 end

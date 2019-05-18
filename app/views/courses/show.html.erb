@@ -13,5 +13,10 @@
   <%= @course.teacher_name %>
 </p>
 
+<p>
+  <strong>Campus:</strong>
+  <%= Venue.find(@course.venue_id).name %>
+</p>
+
 <%= link_to 'Editar', edit_course_path(@course) %> |
 <%= link_to 'Volver', courses_path %>
