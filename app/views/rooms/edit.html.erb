@@ -6,6 +6,8 @@
     <%= f.text_field :number, placeholder: 'Número' %>
   </div>
 
+  <%= f.collection_select :venue_id, Venue.order(:name), :id, :name %>
+
   <div class="actions">
     <%= f.submit "Editar sala" %>
   </div>

@@ -4,6 +4,11 @@
   <%= @room.number %>
 </p>
 
+<p>
+  <strong>Campus:</strong>
+  <%= Venue.find(@course.venue_id).name %>
+</p>
+
 <%=
   if current_user.administrator?
     link_to 'Editar', edit_room_path(@room)

@@ -8,6 +8,16 @@
   <%= @event.description %>
 </p>
 
+<p>
+  <strong>Ramo:</strong>
+  <%= Course.find(@event.course_id).name %>
+</p>
+
+<p>
+  <strong>Ramo:</strong>
+  <%= Room.find(@event.room_id).number %>
+</p>
+
 <%= link_to 'Publicaciones', event_publications_path(@event) %>
 
 <%=

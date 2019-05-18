@@ -13,6 +13,11 @@
   <%= @course.teacher_name %>
 </p>
 
+<p>
+  <strong>Campus:</strong>
+  <%= Venue.find(@course.venue_id).name %>
+</p>
+
 <%=
   if current_user.administrator? || @is_moderator
     link_to 'Revisar solicitudes de moderador', course_moderator_requests_path(@course)

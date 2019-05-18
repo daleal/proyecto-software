@@ -14,6 +14,8 @@
     <%= f.text_field :teacher_name, placeholder: 'Nombre del Profesor' %>
   </div>
 
+  <%= f.collection_select :venue_id, Venue.order(:name), :id, :name %>
+
   <div class="actions">
     <%= f.submit "Crear ramo" %>
   </div>
