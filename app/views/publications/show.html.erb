@@ -13,6 +13,12 @@
   <%= @publication.publication_date.strftime("%d/%m/%y: %H:%M:%S") %>
 </p>
 
-<%= link_to 'Comentarios', publication_comments_path(@publication) %> |
-<%= link_to 'Editar', edit_publication_path(@publication) %> |
-<%= link_to 'Volver', publications_path %>
+<%= link_to 'Comentarios', publication_comments_path(@publication) %>
+
+<%=
+  if (@publication.created_by == current_user.email) || current_user.administrator?
+    link_to 'Editar', edit_event_publication_path(@event, @publication)
+  end
+%>
+
+<%= link_to 'Volver', event_publications_path %>

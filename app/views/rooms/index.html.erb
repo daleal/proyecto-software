@@ -15,8 +15,12 @@
         <td><%= room.number %></td>
         <td><%= Venue.find(room.venue_id).name %></td>
         <td><%= link_to 'Mostrar', room %></td>
-        <td><%= link_to 'Editar', edit_room_path(room) %></td>
-        <td><%= link_to 'Eliminar', room, method: :delete, data: { confirm: '¿Estás seguro?' } %></td>
+        <td><%= if current_user.administrator?
+                  link_to 'Editar', edit_room_path(room)
+                end %></td>
+        <td><%= if current_user.administrator?
+                  link_to 'Eliminar', room, method: :delete, data: { confirm: '¿Estás seguro?' }
+                end %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +28,8 @@
 
 <br>
 
-<%= link_to 'Crear nueva', new_room_path %>
+<%=
+  if current_user.administrator?
+    link_to 'Crear nuevo', new_room_path
+  end
+%>

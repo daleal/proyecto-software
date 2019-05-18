@@ -18,5 +18,8 @@
 
 .byebug_history
 
-#ENV
+# ENV
 .env
+
+# macOS
+*.DS_Store

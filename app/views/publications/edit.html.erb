@@ -1,6 +1,6 @@
 <h1>Editar Publicación</h1>
 
-<%= form_for @publication do |f| %>
+<%= form_for [@event, @publication] do |f| %>
 
   <div class="field">
     <%= f.text_field :title, placeholder: 'Título' %>
@@ -16,5 +16,5 @@
 
 <% end %>
 
-<%= link_to 'Mostrar', @publication %> |
-<%= link_to 'Volver', publications_path %>
+<%= link_to 'Mostrar', event_publication_path(@event, @publication) %> |
+<%= link_to 'Volver', event_publications_path %>

@@ -1,5 +1,6 @@
 class VenuesController < ApplicationController
   before_action :authenticate_user!
+  before_action :access, only: %i[update destroy]
 
   def index
     @venues = Venue.all
@@ -14,15 +15,16 @@ class VenuesController < ApplicationController
   end
 
   def create
-    @venue = Venue.new(venue_params)
-    respond_to do |format|
+    if current_user.administrator?
+      @venue = Venue.new(venue_params)
       if @venue.save
-        format.html do
-          redirect_to @venue, notice: "¡El campus ha sido "\
-                                      "creado con éxito!"
-        end
+        flash[:success] = "Se ha creado un campus con el nombre "\
+                          "#{@venue.name} correctamente."
+      else
+        flash[:warning] = "No se ha podido crear el campus."
       end
     end
+    redirect_to venues_path
   end
 
   def edit
@@ -30,32 +32,38 @@ class VenuesController < ApplicationController
   end
 
   def update
-    @venue = Venue.find(params[:id])
-    respond_to do |format|
-      if @venue.update(venue_params)
-        format.html do
-          redirect_to @venue, notice: "¡El campus ha sido "\
-                                      "editado con éxito!"
-        end
+    if current_user.administrator?
+      @venue = Venue.find(params[:id])
+      if @venue.update_attributes(venue_params)
+        flash[:success] = "Se ha editado el campus con el nombre "\
+                          "#{@venue.name} correctamente."
+      else
+        flash[:warning] = "No se ha podido editar el campus."
       end
     end
+    redirect_to venues_path
   end
 
   def destroy
-    @venue = Venue.find(params[:id])
-    @venue.destroy
-    respond_to do |format|
-      format.html do
-        redirect_to venues_url, notice: "¡El campus ha sido "\
-                                        "eliminado con éxito!"
-      end
+    if current_user.administrator?
+      @venue = Venue.find(params[:id])
+      @venue.destroy
+      flash[:success] = "Se ha eliminado el campus correctamente."
     end
+    redirect_to venues_path
   end
 
   private
 
   def venue_params
     params.require(:venue).permit(:name, :address, :description)
+  end
+
+  def access
+    unless current_user.administrator?
+      flash[:warning] = "No tienes permiso para ejecutar esta acción."
+      redirect_to venues_path
+    end
   end
 
 end

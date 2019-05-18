@@ -1,0 +1,15 @@
+<h1>Crear Solicitud</h1>
+
+<%= form_for [@course, @moderator_request] do |f| %>
+
+  <div class="field">
+    <%= f.text_area :content, placeholder: 'Contenido' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Crear Solicitud" %>
+  </div>
+
+<% end %>
+
+<%= link_to 'Volver', course_moderator_requests_path %>

@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20190518165714) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "publication_id"
+    t.string "created_by"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -39,6 +40,16 @@ ActiveRecord::Schema.define(version: 20190518165714) do
     t.datetime "updated_at", null: false
     t.integer "room_id"
     t.integer "course_id"
+    t.string "created_by"
+  end
+
+  create_table "moderator_requests", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "content"
+    t.integer "status"
   end
 
   create_table "publications", force: :cascade do |t|
@@ -48,6 +59,7 @@ ActiveRecord::Schema.define(version: 20190518165714) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "event_id"
+    t.string "created_by"
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -66,6 +78,7 @@ ActiveRecord::Schema.define(version: 20190518165714) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "role"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
