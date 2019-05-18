@@ -33,7 +33,7 @@ class RoomsController < ApplicationController
     if current_user.administrator?
       @room = Room.find(params[:id])
       if @room.update_attributes(room_params)
-        flash[:success] = "Se ha editado la sala llamada #{@room.letter}"\
+        flash[:success] = "Se ha editado la sala llamada" \
                           "#{@room.number} correctamente."
       else
         flash[:warning] = "No se ha podido editar la sala."
