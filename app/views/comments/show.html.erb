@@ -10,8 +10,8 @@
 
 <%=
   if (@comment.created_by == current_user.email) || current_user.administrator?
-    link_to 'Editar', edit_publication_comment_path(@publication, @comment)
+    link_to 'Editar', edit_comment_path(@comment)
   end
 %>
 
-<%= link_to 'Volver', publication_comments_path %>
+<%= link_to 'Volver', publication_comments_path(@publication) %>

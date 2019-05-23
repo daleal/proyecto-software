@@ -8,8 +8,8 @@ class CommentsController < ApplicationController
   end
 
   def show
-    @publication = Publication.find(params[:publication_id])
     @comment = Comment.find(params[:id])
+    @publication = Publication.find(@comment.publication_id)
   end
 
   def new
@@ -28,16 +28,17 @@ class CommentsController < ApplicationController
     else
       flash[:warning] = "No se ha podido crear el comentario."
     end
-    redirect_to publication_comments_path
+    redirect_to publication_comments_path(@publication)
   end
 
   def edit
-    @publication = Publication.find(params[:publication_id])
     @comment = Comment.find(params[:id])
+    @publication = Publication.find(@comment.publication_id)
   end
 
   def update
     @comment = Comment.find(params[:id])
+    @publication = Publication.find(@comment.publication_id)
     if (@comment.created_by == current_user.email) || \
        current_user.administrator?
       if @comment.update_attributes(comment_params)
@@ -46,17 +47,18 @@ class CommentsController < ApplicationController
         flash[:warning] = "No se ha podido editar el comentario."
       end
     end
-    redirect_to publication_comments_path
+    redirect_to publication_comments_path(@publication)
   end
 
   def destroy
     @comment = Comment.find(params[:id])
+    @publication = Publication.find(@comment.publication_id)
     if (@comment.created_by == current_user.email) || \
        current_user.administrator?
       @comment.destroy
-      flash[:warning] = "Se ha eliminado en comentario correctamente."
+      flash[:success] = "Se ha eliminado el comentario correctamente."
     end
-    redirect_to publication_comments_path
+    redirect_to publication_comments_path(@publication)
   end
 
   private
@@ -66,11 +68,16 @@ class CommentsController < ApplicationController
   end
 
   def access
-    @comment = Comment.find(params[:id])
+    if params.key?(:publication_id)
+      @publication = Publication.find(params[:publication_id])
+    else
+      @comment = Comment.find(params[:id])
+      @publication = Publication.find(@comment.publication_id)
+    end
     unless (@comment.created_by == current_user.email) || \
            current_user.administrator?
       flash[:warning] = "No tienes permiso para ejecutar esta acción."
-      redirect_to publication_comments_path
+      redirect_to publication_comments_path(@publication)
     end
   end
 

@@ -1,6 +1,6 @@
 <h1>Crear nuevo evento</h1>
 
-<%= form_for @event do |f| %>
+<%= form_for [@course, @event] do |f| %>
 
   <div class="field">
     <%= f.text_field :category, placeholder: 'Categoría' %>
@@ -12,12 +12,10 @@
 
   <%= f.collection_select :course_id, Course.order(:name), :id, :name %>
 
-  <%= f.collection_select :room_id, Room.order(:id), :id, :number%>
-
   <div class="actions">
     <%= f.submit "Crear Evento" %>
   </div>
 
 <% end %>
 
-<%= link_to 'Volver', events_path %>
+<%= link_to 'Volver', course_events_path(@course) %>

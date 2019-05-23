@@ -1,6 +1,6 @@
 <h1>Crear Publicación</h1>
 
-<%= form_for [@event, @publication] do |f| %>
+<%= form_for [@course, @publication] do |f| %>
 
   <div class="field">
     <%= f.text_field :title, placeholder: 'Título' %>
@@ -16,4 +16,4 @@
 
 <% end %>
 
-<%= link_to 'Volver', event_publications_path %>
+<%= link_to 'Volver', course_publications_path(@course) %>

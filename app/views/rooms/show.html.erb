@@ -6,8 +6,10 @@
 
 <p>
   <strong>Campus:</strong>
-  <%= Venue.find(@course.venue_id).name %>
+  <%= Venue.find(@room.venue_id).name %>
 </p>
+
+<%= link_to 'Ramos', room_courses_path(@room) %>
 
 <%=
   if current_user.administrator?
@@ -15,4 +17,4 @@
   end
 %>
 
-<%= link_to 'Volver', rooms_path %>
+<%= link_to 'Volver', venue_rooms_path(@venue) %>

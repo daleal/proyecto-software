@@ -17,8 +17,8 @@
 
 <%=
   if (@publication.created_by == current_user.email) || current_user.administrator?
-    link_to 'Editar', edit_event_publication_path(@event, @publication)
+    link_to 'Editar', edit_publication_path(@publication)
   end
 %>
 
-<%= link_to 'Volver', event_publications_path %>
+<%= link_to 'Volver', course_publications_path(@course) %>

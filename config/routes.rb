@@ -4,17 +4,15 @@ Rails.application.routes.draw do
 
   resources :moderator_requests
 
-  resources :venues
-
-  resources :courses do
-    resources :moderator_requests
-  end
-
-  resources :rooms
-
-  resources :events do
-    resources :publications do
-      resources :comments
+  resources :venues, shallow: true do
+    resources :rooms do
+      resources :courses do
+        resources :moderator_requests
+        resources :events
+        resources :publications do
+          resources :comments
+        end
+      end
     end
   end
 

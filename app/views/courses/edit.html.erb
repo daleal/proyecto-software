@@ -14,7 +14,7 @@
     <%= f.text_field :teacher_name, placeholder: 'Nombre del Profesor' %>
   </div>
 
-  <%= f.collection_select :venue_id, Venue.order(:name), :id, :name %>
+  <%= f.collection_select :room_id, Room.order(:number), :id, :number %>
 
   <div class="actions">
     <%= f.submit "Editar ramo" %>
@@ -23,4 +23,4 @@
 <% end %>
 
 <%= link_to 'Mostrar', @course %> |
-<%= link_to 'Volver', courses_path %>
+<%= link_to 'Volver', room_courses_path(@room) %>
