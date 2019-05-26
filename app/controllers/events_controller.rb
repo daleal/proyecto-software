@@ -17,6 +17,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     @event.created_by = current_user.email
+    @event.users.push(current_user)
     if @event.save
       flash[:success] = "Se ha creado un evento del tipo "\
                         "#{@event.category} correctamente."
@@ -52,6 +53,10 @@ class EventsController < ApplicationController
       flash[:success] = "Se ha eliminado el evento correctamente."
     end
     redirect_to events_path
+  end
+
+  def join
+    @event = Event.find(params[:id])
   end
 
   private

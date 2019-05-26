@@ -7,6 +7,8 @@ class User < ApplicationRecord
   enum role: %i[common administrator]
   after_initialize :set_default_role, :if => :new_record?
 
+  has_and_belongs_to_many :events
+
   private
 
   def set_default_role
