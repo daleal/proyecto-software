@@ -3,7 +3,7 @@
 <%= form_for @event do |f| %>
 
   <div class="field">
-    <%= f.text_field :category, placeholder: 'Categoría' %>
+    <%= f.select :category, [['Grupo de Estudio', 'estudio'], ['Busco Clases', 'busco_clase'], ['Ofrezco Clases', 'ofrezco,clase']] %>
   </div>
 
   <div class="field">
