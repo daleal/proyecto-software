@@ -56,14 +56,26 @@ class EventsController < ApplicationController
   end
 
   def join
-    @event = Event.find_by_id(event)
+    @event = Event.find_by_id(params[:event_id])
     @event.users.push(current_user)
-    redirect_to events_path
+    if @event.save
+      flash[:success] = "Te has unido al evento "\
+                        "#{@event.category} correctamente."
+    else
+      flash[:warning] = "No te has podido unir evento."
+    end
+    redirect_to show_event_path
   end
 
   def leave
-    @event = Event.find_by_id(34)
+    @event = Event.find_by_id(params[:event_id])
     @event.users.delete(current_user)
+    if @event.save
+      flash[:success] = "Has dejado el evento "\
+                        "#{@event.category} correctamente."
+    else
+      flash[:warning] = "No has podido dejar evento."
+    end
     redirect_to events_path
   end
 
