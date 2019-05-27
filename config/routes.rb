@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   resources :rooms
 
   resources :events do
+    get 'join'
+    get 'leave'
     resources :publications do
       resources :comments
     end

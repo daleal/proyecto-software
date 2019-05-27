@@ -56,7 +56,15 @@ class EventsController < ApplicationController
   end
 
   def join
-    @event = Event.find(params[:id])
+    @event = Event.find_by_id(event)
+    @event.users.push(current_user)
+    redirect_to events_path
+  end
+
+  def leave
+    @event = Event.find_by_id(34)
+    @event.users.delete(current_user)
+    redirect_to events_path
   end
 
   private

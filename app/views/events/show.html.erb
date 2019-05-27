@@ -37,6 +37,8 @@
   end
 %>
 
+
+
 <%=
   not_joined = true
   @event.users.each do |user|
@@ -45,7 +47,13 @@
     end
   end
   if (@event.created_by != current_user.email && not_joined) || current_user.administrator?
-    link_to 'Unirme', join_event_path(@event)
+    link_to 'Unirme', event_join_path(@event)
+  end
+%>
+
+<%=
+  if (@event.created_by != current_user.email && !not_joined) || current_user.administrator?
+    link_to 'Salirme', event_leave_path(@event)
   end
 %>
 
