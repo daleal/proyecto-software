@@ -5,6 +5,9 @@ class EventsController < ApplicationController
   def index
     @course = Course.find(params[:course_id])
     @events = Event.where(course_id: params[:course_id])
+    moderator = ModeratorRequest.where(course_id: @course.id, user_id: current_user.id).first
+    @is_moderator = !moderator.nil? && moderator.accepted?
+    flash[:info] = "Eres MODERADOR de este ramo." if @is_moderator
   end
 
   def show
@@ -39,7 +42,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @course = Course.find(@event.course_id)
     if (@event.created_by == current_user.email) || \
-       current_user.administrator?
+       current_user.administrator? || @is_moderator
       if @event.update_attributes(event_params)
         flash[:success] = "Se ha editado un evento del tipo "\
                           "#{@event.category} correctamente."
@@ -54,7 +57,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @course = Course.find(@event.course_id)
     if (@event.created_by == current_user.email) || \
-       current_user.administrator?
+       current_user.administrator? || @is_moderator
       @event.destroy
       flash[:success] = "Se ha eliminado el evento correctamente."
     end
@@ -74,8 +77,11 @@ class EventsController < ApplicationController
       @event = Event.find(params[:id])
       @course = Course.find(@event.course_id)
     end
-    unless (@event.created_by == current_user.email) || \
-           current_user.administrator?
+
+    moderator = ModeratorRequest.where(course_id: @course.id, user_id: current_user.id).first
+    @is_moderator = !moderator.nil? && moderator.accepted?
+    unless (@publication.created_by == current_user.email) || \
+           current_user.administrator? || @is_moderator
       flash[:warning] = "No tienes permiso para ejecutar esta acción."
       redirect_to course_events_path(@course)
     end

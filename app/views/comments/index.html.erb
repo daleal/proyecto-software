@@ -17,10 +17,10 @@
         <td><%= comment.comment_date.strftime("%d/%m/%y: %H:%M:%S") %></td>
         <td><%= comment.created_by %></td>
         <td><%= link_to 'Mostrar', comment %></td>
-        <td><%= if (comment.created_by == current_user.email) || current_user.administrator?
+        <td><%= if (comment.created_by == current_user.email) || current_user.administrator? || @is_moderator
                   link_to 'Editar', edit_comment_path(comment)
                 end %></td>
-        <td><%= if (comment.created_by == current_user.email) || current_user.administrator?
+        <td><%= if (comment.created_by == current_user.email) || current_user.administrator? || @is_moderator
                   link_to 'Eliminar', comment, method: :delete, data: { confirm: '¿Estás seguro?' }
                 end %></td>
         <td><%= link_to like_comment_path(comment), class: "like", method: :put do %>
