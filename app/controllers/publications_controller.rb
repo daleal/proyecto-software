@@ -1,6 +1,10 @@
 class PublicationsController < ApplicationController
   before_action :authenticate_user!
   before_action :access, only: %i[update destroy]
+  before_action :set_publication, only: %i[upvote downvote]
+
+  helper_method :upvote
+  helper_method :downvote
 
   def index
     @course = Course.find(params[:course_id])
@@ -65,7 +69,24 @@ class PublicationsController < ApplicationController
     redirect_to course_publications_path(@course)
   end
 
+  # from user
+  def upvote
+    @publication.upvote_from current_user
+    redirect_to course_publications_path(@course)
+  end
+
+  # from user
+  def downvote
+    @publication.downvote_from current_user
+    redirect_to course_publications_path(@course)
+  end
+
   private
+
+  def set_publication
+    @publication = Publication.find(params[:id])
+    @course = Course.find(@publication.course_id)
+  end
 
   def publication_params
     params.require(:publication).permit(:title, :description)
