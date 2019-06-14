@@ -1,6 +1,10 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :access, only: %i[update destroy]
+  before_action :set_comment, only: %i[upvote downvote]
+
+  helper_method :upvote
+  helper_method :downvote
 
   def index
     @publication = Publication.find(params[:publication_id])
@@ -61,7 +65,24 @@ class CommentsController < ApplicationController
     redirect_to publication_comments_path(@publication)
   end
 
+  # from user
+  def upvote
+    @comment.upvote_from current_user
+    redirect_to publication_comments_path(@publication)
+  end
+
+  # from user
+  def downvote
+    @comment.downvote_from current_user
+    redirect_to publication_comments_path(@publication)
+  end
+
   private
+
+  def set_comment
+    @comment = Comment.find(params[:id])
+    @publication = Publication.find(@comment.publication_id)
+  end
 
   def comment_params
     params.require(:comment).permit(:content)

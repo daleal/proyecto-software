@@ -10,7 +10,16 @@ Rails.application.routes.draw do
         resources :moderator_requests
         resources :events
         resources :publications do
-          resources :comments
+          resources :comments do
+            member do
+              put "like" => "comments#upvote"
+              put "dislike" => "comments#downvote"
+            end
+          end
+          member do
+            put "like" => "publications#upvote"
+            put "dislike" => "publications#downvote"
+          end
         end
       end
     end

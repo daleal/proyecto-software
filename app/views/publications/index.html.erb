@@ -25,6 +25,18 @@
         <td><%= if (publication.created_by == current_user.email) || current_user.administrator?
                   link_to 'Eliminar', publication, method: :delete, data: { confirm: '¿Estás seguro?' }
                 end %></td>
+        <td><%= link_to like_publication_path(publication), class: "like", method: :put do %>
+              <button type="button" class="btn btn-info" aria-label="Left Align">
+                <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
+                <span class="badge"><%= publication.get_upvotes.size %></span>
+              </button>
+            <% end %>
+        <td><%= link_to dislike_publication_path(publication), class: "like", method: :put do %>
+              <button type="button" class="btn btn-info" aria-label="Left Align">
+                <span class="glyphicon glyphicon-thumbs-down glyphicon-align-center" aria-hidden="true"></span>
+                <span class="badge"><%= publication.get_downvotes.size %></span>
+              </button>
+            <% end %>
       </tr>
     <% end %>
   </tbody>
