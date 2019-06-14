@@ -3,11 +3,11 @@
 <%= form_for @moderator_request do |f| %>
 
   <div class="field">
-    <%= f.select :status, ModeratorRequest.statuses.keys, placeholder: 'Acción' %>
+    <%= f.select :status, ModeratorRequest.statuses.keys, placeholder: 'Estado' %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Enviar respuesta" %>
+    <%= f.submit "Actualizar estado" %>
   </div>
 
 <% end %>
