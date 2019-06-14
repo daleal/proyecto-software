@@ -1,6 +1,6 @@
 <h1>Responder a la Solicitud</h1>
 
-<%= form_for [@course, @moderator_request] do |f| %>
+<%= form_for @moderator_request do |f| %>
 
   <div class="field">
     <%= f.select :status, ModeratorRequest.statuses.keys, placeholder: 'Acción' %>
@@ -12,5 +12,4 @@
 
 <% end %>
 
-<%= link_to 'Mostrar', course_moderator_request_path(@course, @moderator_request) %> |
-<%= link_to 'Volver', course_moderator_requests_path %>
+<%= link_to 'Volver', course_moderator_requests_path(@course) %>

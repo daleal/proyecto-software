@@ -31,16 +31,17 @@ class ModeratorRequestsController < ApplicationController
     else
       flash[:warning] = "Ya tienes una solicitud creada para este curso."
     end
-    redirect_to course_moderator_requests_path
+    redirect_to course_moderator_requests_path(@course)
   end
 
   def edit
-    @course = Course.find(params[:course_id])
     @moderator_request = ModeratorRequest.find(params[:id])
+    @course = Course.find(@moderator_request.course_id)
   end
 
   def update
     @moderator_request = ModeratorRequest.find(params[:id])
+    @course = Course.find(@moderator_request.course_id)
     if current_user.administrator?
       if @moderator_request.update_attributes(moderator_request_params)
         flash[:success] = "Se ha respondido a la solicitud correctamente."
@@ -48,17 +49,18 @@ class ModeratorRequestsController < ApplicationController
         flash[:warning] = "No se ha podido responder a la solicitud."
       end
     end
-    redirect_to course_moderator_requests_path
+    redirect_to course_moderator_requests_path(@course)
   end
 
   def destroy
     @moderator_request = ModeratorRequest.find(params[:id])
+    @course = Course.find(@moderator_request.course_id)
     if (@moderator_request.user_id == current_user.id) || \
        current_user.administrator?
       @moderator_request.destroy
       flash[:warning] = "Se ha eliminado en comentario correctamente."
     end
-    redirect_to course_moderator_requests_path
+    redirect_to course_moderator_requests_path(@course)
   end
 
   private
@@ -72,7 +74,7 @@ class ModeratorRequestsController < ApplicationController
     unless (@moderator_request.user_id == current_user.id) || \
            current_user.administrator?
       flash[:warning] = "No tienes permiso para ejecutar esta acción."
-      redirect_to course_moderator_requests_path
+      redirect_to course_moderator_requests_path(@course)
     end
   end
 
