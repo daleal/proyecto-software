@@ -23,6 +23,7 @@ class EventsController < ApplicationController
   def create
     @course = Course.find(params[:course_id])
     @event = Event.new(event_params)
+    @event.users.push(current_user)
     @event.created_by = current_user.id
     if @event.save
       flash[:success] = "Se ha creado un evento del tipo "\
@@ -56,6 +57,30 @@ class EventsController < ApplicationController
     @event.destroy
     flash[:success] = "Se ha eliminado el evento correctamente."
     redirect_to course_events_path(@course)
+  end
+
+  def join
+    @event = Event.find_by_id(params[:event_id])
+    @event.users.push(current_user)
+    if @event.save
+      flash[:success] = "Te has unido al evento "\
+                        "#{@event.category} correctamente."
+    else
+      flash[:warning] = "No te has podido unir evento."
+    end
+    redirect_to show_event_path
+  end
+
+  def leave
+    @event = Event.find_by_id(params[:event_id])
+    @event.users.delete(current_user)
+    if @event.save
+      flash[:success] = "Has dejado el evento "\
+                        "#{@event.category} correctamente."
+    else
+      flash[:warning] = "No has podido dejar evento."
+    end
+    redirect_to events_path
   end
 
   private

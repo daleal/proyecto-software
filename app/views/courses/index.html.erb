@@ -6,7 +6,7 @@
       <th>Nombre</th>
       <th>Iniciales</th>
       <th>Nombre del Profesor</th>
-      <th>Sala</th>
+      <th>Campus</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,7 +17,7 @@
         <td><%= course.name %></td>
         <td><%= course.initials %></td>
         <td><%= course.teacher_name %></td>
-        <td><%= @room.number %></td>
+        <td><%= Venue.find(course.venue_id).name %></td>
         <td><%= link_to 'Mostrar', course %></td>
         <td><%= if current_user.administrator?
                   link_to 'Editar', edit_course_path(course)

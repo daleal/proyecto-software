@@ -42,6 +42,11 @@ ActiveRecord::Schema.define(version: 20190614162114) do
     t.integer "created_by"
   end
 
+  create_table "events_users", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "event_id", null: false
+  end
+
   create_table "moderator_requests", force: :cascade do |t|
     t.integer "user_id"
     t.integer "course_id"

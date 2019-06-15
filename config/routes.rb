@@ -4,24 +4,29 @@ Rails.application.routes.draw do
 
   resources :moderator_requests
 
-  resources :venues, shallow: true do
-    resources :rooms do
-      resources :courses do
-        resources :moderator_requests
-        resources :events
-        resources :publications do
-          resources :comments do
-            member do
-              put "like" => "comments#upvote"
-              put "dislike" => "comments#downvote"
-            end
-          end
-          member do
-            put "like" => "publications#upvote"
-            put "dislike" => "publications#downvote"
-          end
-        end
+  resources :venues
+
+  resources :courses do
+    resources :moderator_requests
+  end
+
+  resources :rooms
+
+  resources :events do
+    get 'join'
+    get 'leave'
+    
+    resources :publications do
+      member do
+        put "like" => "publications#upvote"
+        put "dislike" => "publications#downvote"
       end
+      
+      resources :comments do
+        member do
+          put "like" => "comments#upvote"
+          put "dislike" => "comments#downvote"
+        end
     end
   end
 

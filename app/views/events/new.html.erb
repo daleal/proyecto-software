@@ -3,7 +3,7 @@
 <%= form_for [@course, @event] do |f| %>
 
   <div class="field">
-    <%= f.text_field :category, placeholder: 'Categoría' %>
+    <%= f.select :category, [['Grupo de Estudio', 'Grupo de Estudio'], ['Busco Clases', 'Busco Clases'], ['Ofrezco Clases', 'Ofrezco Clases']] %>
   </div>
 
   <div class="field">
@@ -11,6 +11,8 @@
   </div>
 
   <%= f.collection_select :course_id, Course.order(:name), :id, :name %>
+
+  <%= f.collection_select :room_id, Room.order(:id), :id, :number%>
 
   <div class="actions">
     <%= f.submit "Crear Evento" %>

@@ -12,6 +12,8 @@
 
   <%= f.collection_select :course_id, Course.order(:name), :id, :name %>
 
+  <%= f.collection_select :room_id, Room.order(:id), :id, :number%>
+
   <div class="actions">
     <%= f.submit "Editar Evento" %>
   </div>
