@@ -13,5 +13,9 @@
  */
 
 @import "bootstrap-sprockets";
-@import "bootstrap";
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+@import "bootstrap-alerts";
+@import "font-awesome";
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,600,600italic');  // API para fonts
 @import "template/main";

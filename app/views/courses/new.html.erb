@@ -1,25 +1,42 @@
-<h1>Crear ramo</h1>
+<div class="inner">
 
-<%= form_for [@room, @course] do |f| %>
+  <h1>Crear ramo</h1>
 
-  <div class="field">
-    <%= f.text_field :name, placeholder: 'Nombre' %>
+  <%= form_for [@room, @course] do |f| %>
+
+    <div class="row gtr-uniform">
+
+      <div class="col-6 col-12-xsmall">
+        <%= f.text_field :name, placeholder: 'Nombre' %>
+      </div>
+
+      <div class="col-6 col-12-xsmall">
+        <%= f.text_field :initials, placeholder: 'Iniciales' %>
+      </div>
+
+      <div class="col-6 col-12-xsmall">
+        <%= f.text_field :teacher_name, placeholder: 'Nombre del Profesor' %>
+      </div>
+
+      <div class="col-6 col-12-xsmall">
+        <%= f.collection_select :room_id, Room.order(:number), :id, :number %>
+        <i>Sala en la que se dicta</i>
+      </div>
+
+      <div class="col-12">
+        <ul class="actions">
+          <li><%= f.submit "Crear ramo" %></li>
+        </ul>
+      </div>
+
+    </div>
+
+  <% end %>
+
+  <div class="col-12">
+    <ul class="actions">
+      <li><%= link_to 'Volver', room_courses_path(@room), class: "button primary" %></li>
+    </ul>
   </div>
 
-  <div class="field">
-    <%= f.text_field :initials, placeholder: 'Iniciales' %>
-  </div>
-
-  <div class="field">
-    <%= f.text_field :teacher_name, placeholder: 'Nombre del Profesor' %>
-  </div>
-
-  <%= f.collection_select :room_id, Room.order(:number), :id, :number %>
-
-  <div class="actions">
-    <%= f.submit "Crear ramo" %>
-  </div>
-
-<% end %>
-
-<%= link_to 'Volver', room_courses_path(@room) %>
+</div>

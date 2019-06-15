@@ -1,19 +1,33 @@
-<h1>Crear Publicación</h1>
+<div class="inner">
 
-<%= form_for [@course, @publication] do |f| %>
+  <h1>Crear Publicación</h1>
 
-  <div class="field">
-    <%= f.text_field :title, placeholder: 'Título' %>
+  <%= form_for [@course, @publication] do |f| %>
+
+    <div class="row gtr-uniform">
+
+      <div class="col-12">
+        <%= f.text_field :title, placeholder: 'Título' %>
+      </div>
+
+      <div class="col-12">
+        <%= f.text_area :description, placeholder: 'Descripción' %>
+      </div>
+
+      <div class="col-12">
+        <ul class="actions">
+          <li><%= f.submit "Crear Publicación" %></li>
+        </ul>
+      </div>
+
+    </div>
+
+  <% end %>
+
+  <div class="col-12">
+    <ul class="actions">
+      <li><%= link_to 'Volver', course_publications_path(@course), class: "button primary"   %></li>
+    </ul>
   </div>
 
-  <div class="field">
-    <%= f.text_area :description, placeholder: 'Descripción' %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Crear Publicación" %>
-  </div>
-
-<% end %>
-
-<%= link_to 'Volver', course_publications_path(@course) %>
+</div>

@@ -1,17 +1,33 @@
-<h1>Crear sala</h1>
+<div class="inner">
 
-<%= form_for [@venue, @room] do |f| %>
+  <h1>Crear sala</h1>
 
-  <div class="field">
-    <%= f.text_field :number, placeholder: 'Número' %>
+  <%= form_for [@venue, @room] do |f| %>
+
+    <div class="row gtr-uniform">
+
+      <div class="col-12">
+        <%= f.text_field :number, placeholder: 'Número' %>
+      </div>
+
+      <div class="col-12">
+        <%= f.collection_select :venue_id, Venue.order(:name), :id, :name %>
+      </div>
+
+      <div class="col-12">
+        <ul class="actions">
+          <li><%= f.submit "Crear sala" %></li>
+        </ul>
+      </div>
+
+    </div>
+
+  <% end %>
+
+  <div class="col-12">
+    <ul class="actions">
+      <li><%= link_to 'Volver', venue_rooms_path(@venue), class: "button primary" %></li>
+    </ul>
   </div>
 
-  <%= f.collection_select :venue_id, Venue.order(:name), :id, :name %>
-
-  <div class="actions">
-    <%= f.submit "Crear sala" %>
-  </div>
-
-<% end %>
-
-<%= link_to 'Volver', venue_rooms_path(@venue) %>
+</div>

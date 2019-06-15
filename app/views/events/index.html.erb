@@ -1,35 +1,53 @@
-<h1>Lista de eventos creados</h1>
+<div class="inner">
 
-<table>
-  <thead>
-    <tr>
-      <th>Categoría</th>
-      <th>Descripción</th>
-      <th>Ramo</th>
-      <th>Creado por</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<form>
+  <input name=q <%= @q %> >
+  <button type=”submit”>Filtrar</button>
+  </form>
+  <form>
+  <button type=”submit”>Quitar Filtro</button>
+  </form>
 
-  <tbody>
-    <% @events.each do |event| %>
-      <tr>
-        <td><%= event.category %></td>
-        <td><%= event.description %></td>
-        <td><%= Course.find(event.course_id).name %></td>
-        <td><%= User.find(event.created_by).email %></td>
-        <td><%= link_to 'Mostrar', event %></td>
-        <td><%= if (event.created_by == current_user.id) || current_user.administrator? || @is_moderator
-                  link_to 'Editar', edit_event_path(event)
-                end %></td>
-        <td><%= if (event.created_by == current_user.id) || current_user.administrator? || @is_moderator
-                  link_to 'Eliminar', event, method: :delete, data: { confirm: '¿Estás seguro?' }
-                end %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <header class="major">
+    <h1>Lista de eventos creados</h1>
+  </header>
 
-<br>
+  <div class="table-wrapper">
 
-<%= link_to 'Crear nuevo', new_course_event_path(@course) %>
+    <table class="alt">
+      <thead>
+        <tr>
+          <th>Categoría</th>
+          <th>Descripción</th>
+          <th>Ramo</th>
+          <th>Creado por</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @events.each do |event| %>
+          <tr>
+            <td><%= event.category %></td>
+            <td><%= event.description %></td>
+            <td><%= Course.find(event.course_id).name %></td>
+            <td><%= User.find(event.created_by).email %></td>
+            <td><%= link_to 'Mostrar', event %></td>
+            <td><%= if (event.created_by == current_user.id) || current_user.administrator? || @is_moderator
+                      link_to 'Editar', edit_event_path(event)
+                    end %></td>
+            <td><%= if (event.created_by == current_user.id) || current_user.administrator? || @is_moderator
+                      link_to 'Eliminar', event, method: :delete, data: { confirm: '¿Estás seguro?' }
+                    end %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+
+  <br>
+
+  <%= link_to 'Crear nuevo', new_course_event_path(@course) %>
+
+</div>

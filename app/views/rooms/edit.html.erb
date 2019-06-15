@@ -1,18 +1,22 @@
-<h1>Editar sala</h1>
+<div class="inner">
 
-<%= form_for @room do |f| %>
+  <h1>Editar sala</h1>
 
-  <div class="field">
-    <%= f.text_field :number, placeholder: 'Número' %>
-  </div>
+  <%= form_for @room do |f| %>
 
-  <%= f.collection_select :venue_id, Venue.order(:name), :id, :name %>
+    <div class="field">
+      <%= f.text_field :number, placeholder: 'Número' %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Editar sala" %>
-  </div>
+    <%= f.collection_select :venue_id, Venue.order(:name), :id, :name %>
 
-<% end %>
+    <div class="actions">
+      <%= f.submit "Editar sala" %>
+    </div>
 
-<%= link_to 'Mostrar', @room %> |
-<%= link_to 'Volver', venue_rooms_path(@venue) %>
+  <% end %>
+
+  <%= link_to 'Mostrar', @room %> |
+  <%= link_to 'Volver', venue_rooms_path(@venue) %>
+
+</div>

@@ -2,9 +2,26 @@ class RoomsController < ApplicationController
   before_action :authenticate_user!
   before_action :access, only: %i[create update destroy]
 
+  def catalog
+    @q = params[:q]
+    
+    if @q
+      @rooms = Room.where(room_id: @q)
+    else
+      @rooms = Room.all
+    end
+  end
+
   def index
     @venue = Venue.find(params[:venue_id])
-    @rooms = Room.where(venue_id: params[:venue_id])
+
+    if @q
+      @rooms = Room.where(venue_id: params[:venue_id], room_id: @q)
+    else
+      @rooms = Room.where(venue_id: params[:venue_id])
+    end
+
+    
   end
 
   def show

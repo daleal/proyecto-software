@@ -1,24 +1,28 @@
-<p>
-  <strong>Título:</strong>
-  <%= @publication.title %>
-</p>
+<div class="inner">
 
-<p>
-  <strong>Descripción:</strong>
-  <%= @publication.description %>
-</p>
+  <p>
+    <strong>Título:</strong>
+    <%= @publication.title %>
+  </p>
 
-<p>
-  <strong>Fecha de creación:</strong>
-  <%= @publication.publication_date.strftime("%d/%m/%y: %H:%M:%S") %>
-</p>
+  <p>
+    <strong>Descripción:</strong>
+    <%= @publication.description %>
+  </p>
 
-<%= link_to 'Comentarios', publication_comments_path(@publication) %>
+  <p>
+    <strong>Fecha de creación:</strong>
+    <%= @publication.publication_date.strftime("%d/%m/%y: %H:%M:%S") %>
+  </p>
 
-<%=
-  if (@publication.created_by == current_user.id) || current_user.administrator?
-    link_to 'Editar', edit_publication_path(@publication)
-  end
-%>
+  <%= link_to 'Comentarios', publication_comments_path(@publication) %>
 
-<%= link_to 'Volver', course_publications_path(@course) %>
+  <%=
+    if (@publication.created_by == current_user.id) || current_user.administrator?
+      link_to 'Editar', edit_publication_path(@publication)
+    end
+  %>
+
+  <%= link_to 'Volver', course_publications_path(@course) %>
+
+</div>

@@ -2,9 +2,26 @@ class EventsController < ApplicationController
   before_action :authenticate_user!
   before_action :access, only: %i[update destroy]
 
+  def catalog
+    @q = params[:q]
+    
+    if @q
+      @events = Event.where(category: @q) + Course.where(description: @q)
+    else
+      @events = Event.all
+    end
+  end
+
   def index
     @course = Course.find(params[:course_id])
-    @events = Event.where(course_id: params[:course_id])
+    @q = params[:q]
+
+    if @q
+      @events = Event.where(course_id: params[:course_id], category: @q), + Course.where(course_id: params[:course_id], description: @q)
+    else
+      @events = Event.where(course_id: params[:course_id])
+    end
+
     moderator = ModeratorRequest.where(course_id: @course.id, user_id: current_user.id).first
     @is_moderator = !moderator.nil? && moderator.accepted?
     flash[:info] = "Vista de moderador." if @is_moderator

@@ -11,6 +11,7 @@ gem 'jbuilder',                '2.7.0'
 gem 'pg',                      '0.20.0'
 gem 'rubocop'
 gem 'devise'
+gem 'font-awesome-rails'
 gem 'bootstrap-sass'
 gem 'acts_as_votable', '~> 0.12.0'
 

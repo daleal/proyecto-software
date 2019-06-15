@@ -1,16 +1,20 @@
-<h1>Editar Comentario</h1>
+<div class="inner">
 
-<%= form_for @comment do |f| %>
+  <h1>Editar Comentario</h1>
 
-  <div class="field">
-    <%= f.text_area :content, placeholder: 'Contenido' %>
-  </div>
+  <%= form_for @comment do |f| %>
 
-  <div class="actions">
-    <%= f.submit "Editar Comentario" %>
-  </div>
+    <div class="field">
+      <%= f.text_area :content, placeholder: 'Contenido' %>
+    </div>
 
-<% end %>
+    <div class="actions">
+      <%= f.submit "Editar Comentario" %>
+    </div>
 
-<%= link_to 'Mostrar', @comment %> |
-<%= link_to 'Volver', publication_comments_path(@publication) %>
+  <% end %>
+
+  <%= link_to 'Mostrar', @comment %> |
+  <%= link_to 'Volver', publication_comments_path(@publication) %>
+
+</div>

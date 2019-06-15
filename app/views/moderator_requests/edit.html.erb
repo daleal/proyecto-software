@@ -1,15 +1,19 @@
-<h1>Responder a la Solicitud</h1>
+<div class="inner">
 
-<%= form_for @moderator_request do |f| %>
+  <h1>Responder a la Solicitud</h1>
 
-  <div class="field">
-    <%= f.select :status, ModeratorRequest.statuses.keys, placeholder: 'Estado' %>
-  </div>
+  <%= form_for @moderator_request do |f| %>
 
-  <div class="actions">
-    <%= f.submit "Actualizar estado" %>
-  </div>
+    <div class="field">
+      <%= f.select :status, ModeratorRequest.statuses.keys, placeholder: 'Estado' %>
+    </div>
 
-<% end %>
+    <div class="actions">
+      <%= f.submit "Actualizar estado" %>
+    </div>
 
-<%= link_to 'Volver', course_moderator_requests_path(@course) %>
+  <% end %>
+
+  <%= link_to 'Volver', course_moderator_requests_path(@course) %>
+
+</div>

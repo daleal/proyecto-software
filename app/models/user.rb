@@ -9,12 +9,17 @@ class User < ApplicationRecord
 
   has_and_belongs_to_many :events
 
+  acts_as_voter
+
+  scope :other_than, -> (user_id) do
+    where (["(users.id <> ?)",
+    user_id])
+  end
+
   private
 
   def set_default_role
     self.role ||= :common
   end
-
-  acts_as_voter
 
 end

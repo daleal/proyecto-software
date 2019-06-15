@@ -1,15 +1,29 @@
-<h1>Crear Comentario</h1>
+<div class="inner">
 
-<%= form_for [@publication, @comment] do |f| %>
+  <h1>Crear Comentario</h1>
 
-  <div class="field">
-    <%= f.text_area :content, placeholder: 'Contenido' %>
+  <%= form_for [@publication, @comment] do |f| %>
+
+    <div class="row gtr-uniform">
+
+      <div class="col-12">
+        <%= f.text_area :content, placeholder: 'Contenido' %>
+      </div>
+
+      <div class="col-12">
+        <ul class="actions">
+          <li><%= f.submit "Crear Comentario" %></li>
+        </ul>
+      </div>
+
+    </div>
+
+  <% end %>
+
+  <div class="col-12">
+    <ul class="actions">
+      <li><%= link_to 'Volver', publication_comments_path, class: "button primary" %></li>
+    </ul>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Crear Comentario" %>
-  </div>
-
-<% end %>
-
-<%= link_to 'Volver', publication_comments_path %>
+</div>

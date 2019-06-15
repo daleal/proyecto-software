@@ -2,13 +2,17 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  # resources :moderator_requests
+  get 'rooms/catalog', to: 'rooms#catalog'
+  get 'courses/catalog', to: 'courses#catalog'
+  get 'events/catalog', to: 'events#catalog'
+  get 'publications/catalog', to: 'publications#catalog'
 
   resources :venues, shallow: true do
 
     resources :rooms do
 
       resources :courses do
+        
         resources :moderator_requests
 
         resources :events do
@@ -33,6 +37,9 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :conversations do
+    resources :messages
+  end
 
   root 'static_pages#home'
 end

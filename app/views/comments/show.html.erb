@@ -1,17 +1,21 @@
-<p>
-  <strong>Contenido:</strong>
-  <%= @comment.content %>
-</p>
+<div class="inner">
 
-<p>
-  <strong>Fecha de creación:</strong>
-  <%= @comment.comment_date.strftime("%d/%m/%y: %H:%M:%S") %>
-</p>
+  <p>
+    <strong>Contenido:</strong>
+    <%= @comment.content %>
+  </p>
 
-<%=
-  if (@comment.created_by == current_user.id) || current_user.administrator?
-    link_to 'Editar', edit_comment_path(@comment)
-  end
-%>
+  <p>
+    <strong>Fecha de creación:</strong>
+    <%= @comment.comment_date.strftime("%d/%m/%y: %H:%M:%S") %>
+  </p>
 
-<%= link_to 'Volver', publication_comments_path(@publication) %>
+  <%=
+    if (@comment.created_by == current_user.id) || current_user.administrator?
+      link_to 'Editar', edit_comment_path(@comment)
+    end
+  %>
+
+  <%= link_to 'Volver', publication_comments_path(@publication) %>
+
+</div>

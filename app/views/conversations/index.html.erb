@@ -1,0 +1,42 @@
+<h1>Lista de Conversaciones</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Usuario</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @conversations.each do |conversation| %>
+      <% other_user_id = if conversation.sender_id == current_user.id then conversation.recipient_id else conversation.sender_id end %>
+        <tr>
+          <td><%= User.find(other_user_id).email %></td>
+          <td><%= link_to 'Abrir', conversation_messages_path(conversation) %></td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<h1>Comenzar nueva conversación</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Usuario</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= link_to 'Comenzar', conversations_path(sender_id: current_user.id, recipient_id: user.id), method: "post" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

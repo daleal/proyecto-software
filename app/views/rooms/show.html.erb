@@ -1,20 +1,23 @@
+<div class="inner">
 
-<p>
-  <strong>Número:</strong>
-  <%= @room.number %>
-</p>
+  <p>
+    <strong>Número:</strong>
+    <%= @room.number %>
+  </p>
 
-<p>
-  <strong>Campus:</strong>
-  <%= Venue.find(@room.venue_id).name %>
-</p>
+  <p>
+    <strong>Campus:</strong>
+    <%= Venue.find(@room.venue_id).name %>
+  </p>
 
-<%= link_to 'Ramos', room_courses_path(@room) %>
+  <%= link_to 'Ramos', room_courses_path(@room) %>
 
-<%=
-  if current_user.administrator?
-    link_to 'Editar', edit_room_path(@room)
-  end
-%>
+  <%=
+    if current_user.administrator?
+      link_to 'Editar', edit_room_path(@room)
+    end
+  %>
 
-<%= link_to 'Volver', venue_rooms_path(@venue) %>
+  <%= link_to 'Volver', venue_rooms_path(@venue) %>
+
+</div>
