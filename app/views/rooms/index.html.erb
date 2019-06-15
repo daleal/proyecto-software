@@ -1,35 +1,45 @@
-<h1>Lista de salas creadas</h1>
+<div class="inner">
 
-<table>
-  <thead>
-    <tr>
-      <th>Número</th>
-      <th>Campus</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <header class="major">
+    <h1>Lista de salas creadas</h1>
+  </header>
 
-  <tbody>
-    <% @rooms.each do |room| %>
-      <tr>
-        <td><%= room.number %></td>
-        <td><%= Venue.find(room.venue_id).name %></td>
-        <td><%= link_to 'Mostrar', room %></td>
-        <td><%= if current_user.administrator?
-                  link_to 'Editar', edit_room_path(room)
-                end %></td>
-        <td><%= if current_user.administrator?
-                  link_to 'Eliminar', room, method: :delete, data: { confirm: '¿Estás seguro?' }
-                end %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <div class="table-wrapper">
 
-<br>
+    <table class="alt">
+      <thead>
+        <tr>
+          <th>Número</th>
+          <th>Campus</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
 
-<%=
-  if current_user.administrator?
-    link_to 'Crear nuevo', new_venue_room_path(@venue)
-  end
-%>
+      <tbody>
+        <% @rooms.each do |room| %>
+          <tr>
+            <td><%= room.number %></td>
+            <td><%= Venue.find(room.venue_id).name %></td>
+            <td><%= link_to 'Mostrar', room %></td>
+            <td><%= if current_user.administrator?
+                      link_to 'Editar', edit_room_path(room)
+                    end %></td>
+            <td><%= if current_user.administrator?
+                      link_to 'Eliminar', room, method: :delete, data: { confirm: '¿Estás seguro?' }
+                    end %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+
+  <br>
+
+  <%=
+    if current_user.administrator?
+      link_to 'Crear nuevo', new_venue_room_path(@venue)
+    end
+  %>
+
+</div>

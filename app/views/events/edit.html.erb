@@ -1,22 +1,26 @@
-<h1>Editar evento</h1>
+<div class="inner">
 
-<%= form_for @event do |f| %>
+  <h1>Editar evento</h1>
 
-  <div class="field">
-    <%= f.text_field :category, placeholder: 'Categoría' %>
-  </div>
+  <%= form_for @event do |f| %>
 
-  <div class="field">
-    <%= f.text_field :description, placeholder: 'Descripción' %>
-  </div>
+    <div class="field">
+      <%= f.text_field :category, placeholder: 'Categoría' %>
+    </div>
 
-  <%= f.collection_select :course_id, Course.order(:name), :id, :name %>
+    <div class="field">
+      <%= f.text_field :description, placeholder: 'Descripción' %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Editar Evento" %>
-  </div>
+    <%= f.collection_select :course_id, Course.order(:name), :id, :name %>
 
-<% end %>
+    <div class="actions">
+      <%= f.submit "Editar Evento" %>
+    </div>
 
-<%= link_to 'Mostrar', @event %> |
-<%= link_to 'Volver', course_events_path(@course) %>
+  <% end %>
+
+  <%= link_to 'Mostrar', @event %> |
+  <%= link_to 'Volver', course_events_path(@course) %>
+
+</div>

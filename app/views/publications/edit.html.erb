@@ -1,20 +1,24 @@
-<h1>Editar Publicación</h1>
+<div class="inner">
 
-<%= form_for @publication do |f| %>
+  <h1>Editar Publicación</h1>
 
-  <div class="field">
-    <%= f.text_field :title, placeholder: 'Título' %>
-  </div>
+  <%= form_for @publication do |f| %>
 
-  <div class="field">
-    <%= f.text_area :description, placeholder: 'Descripción' %>
-  </div>
+    <div class="field">
+      <%= f.text_field :title, placeholder: 'Título' %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Editar Publicación" %>
-  </div>
+    <div class="field">
+      <%= f.text_area :description, placeholder: 'Descripción' %>
+    </div>
 
-<% end %>
+    <div class="actions">
+      <%= f.submit "Editar Publicación" %>
+    </div>
 
-<%= link_to 'Mostrar', @publication %> |
-<%= link_to 'Volver', course_publications_path(@course) %>
+  <% end %>
+
+  <%= link_to 'Mostrar', @publication %> |
+  <%= link_to 'Volver', course_publications_path(@course) %>
+
+</div>

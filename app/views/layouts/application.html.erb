@@ -31,7 +31,11 @@
         <% end %>
       <% end %>
 
-      <%= yield %>
+      <div id="main" class="alt">
+        <%= yield %>
+      </div>
+
+      <%= render 'layouts/footer' %>
 
     </div>
 

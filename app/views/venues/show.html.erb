@@ -1,24 +1,28 @@
-<p>
-  <strong>Nombre:</strong>
-  <%= @venue.name %>
-</p>
+<div class="inner">
 
-<p>
-  <strong>Dirección:</strong>
-  <%= @venue.address %>
-</p>
+  <p>
+    <strong>Nombre:</strong>
+    <%= @venue.name %>
+  </p>
 
-<p>
-  <strong>Descripción:</strong>
-  <%= @venue.description %>
-</p>
+  <p>
+    <strong>Dirección:</strong>
+    <%= @venue.address %>
+  </p>
 
-<%= link_to 'Salas', venue_rooms_path(@venue) %>
+  <p>
+    <strong>Descripción:</strong>
+    <%= @venue.description %>
+  </p>
 
-<%=
-  if current_user.administrator?
-    link_to 'Editar', edit_venue_path(@venue)
-  end
-%>
+  <%= link_to 'Salas', venue_rooms_path(@venue) %>
 
-<%= link_to 'Volver', venues_path %>
+  <%=
+    if current_user.administrator?
+      link_to 'Editar', edit_venue_path(@venue)
+    end
+  %>
+
+  <%= link_to 'Volver', venues_path %>
+
+</div>

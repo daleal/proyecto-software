@@ -1,23 +1,39 @@
-<h1>Crear nuevo campus</h1>
+<div class="inner">
 
-<%= form_for @venue do |f| %>
+  <header class="major">
+    <h1>Crear nuevo campus</h1>
+  </header>
 
-  <div class="field">
-    <%= f.text_field :name, placeholder: 'Nombre' %>
+  <%= form_for @venue do |f| %>
+
+    <div class="row gtr-uniform">
+
+      <div class="col-6 col-12-xsmall">
+        <%= f.text_field :name, placeholder: 'Nombre' %>
+      </div>
+
+      <div class="col-6 col-12-xsmall">
+        <%= f.text_field :address, placeholder: 'Dirección' %>
+      </div>
+
+      <div class="col-12">
+        <%= f.text_field :description, placeholder: 'Descripción' %>
+      </div>
+
+      <div class="col-12">
+        <ul class="actions">
+          <li><%= f.submit "Crear Campus" %></li>
+        </ul>
+      </div>
+
+    </div>
+
+  <% end %>
+
+  <div class="col-12">
+    <ul class="actions">
+      <li><%= link_to 'Volver', venues_path, class: "button primary" %></li>
+    </ul>
   </div>
 
-  <div class="field">
-    <%= f.text_field :address, placeholder: 'Dirección' %>
-  </div>
-
-  <div class="field">
-    <%= f.text_field :description, placeholder: 'Descripción' %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Crear Campus" %>
-  </div>
-
-<% end %>
-
-<%= link_to 'Volver', venues_path %>
+</div>

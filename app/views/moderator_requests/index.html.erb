@@ -1,38 +1,48 @@
-<h1><%= "Lista de solicitudes del curso #{@course.initials}: #{@course.name}" %></h1>
+<div class="inner">
 
-<table>
-  <thead>
-    <tr>
-      <th>Ramo</th>
-      <th>Mensaje</th>
-      <th>Fecha de creación</th>
-      <th>Estado</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <header class="major">
+    <h1><%= "Lista de solicitudes del curso #{@course.initials}: #{@course.name}" %></h1>
+  </header>
 
-  <tbody>
-    <% @moderator_requests.each do |moderator_request| %>
-      <tr>
-        <td><%= moderator_request.course_id %></td>
-        <td><%= moderator_request.content %></td>
-        <td><%= moderator_request.created_at.strftime("%d/%m/%y: %H:%M:%S") %></td>
-        <td><%= moderator_request.status %></td>
-        <td><%= if (current_user.administrator?) ||(@is_moderator && moderator_request.pending?)
-                  link_to 'Actualizar estado', edit_moderator_request_path(moderator_request)
-                end %><td/>
-        <td><%= if (moderator_request.user_id == current_user.id)
-                  link_to 'Cancelar', moderator_request, method: :delete, data: { confirm: '¿Estás seguro?' }
-                end %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <div class="table-wrapper">
 
-<br>
+    <table class="alt">
+      <thead>
+        <tr>
+          <th>Ramo</th>
+          <th>Mensaje</th>
+          <th>Fecha de creación</th>
+          <th>Estado</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
 
-<%=
-  if !current_user.administrator? && !@is_moderator
-    link_to 'Crear nueva', new_course_moderator_request_path
-  end
-%>
+      <tbody>
+        <% @moderator_requests.each do |moderator_request| %>
+          <tr>
+            <td><%= moderator_request.course_id %></td>
+            <td><%= moderator_request.content %></td>
+            <td><%= moderator_request.created_at.strftime("%d/%m/%y: %H:%M:%S") %></td>
+            <td><%= moderator_request.status %></td>
+            <td><%= if (current_user.administrator?) ||(@is_moderator && moderator_request.pending?)
+                      link_to 'Actualizar estado', edit_moderator_request_path(moderator_request)
+                    end %><td/>
+            <td><%= if (moderator_request.user_id == current_user.id)
+                      link_to 'Cancelar', moderator_request, method: :delete, data: { confirm: '¿Estás seguro?' }
+                    end %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+
+  <br>
+
+  <%=
+    if !current_user.administrator? && !@is_moderator
+      link_to 'Crear nueva', new_course_moderator_request_path
+    end
+  %>
+
+</div>

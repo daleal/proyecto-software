@@ -1,24 +1,28 @@
-<h1>Editar campus</h1>
+<div class="inner">
 
-<%= form_for @venue do |f| %>
+  <h1>Editar campus</h1>
 
-  <div class="field">
-    <%= f.text_field :name, placeholder: 'Nombre' %>
-  </div>
+  <%= form_for @venue do |f| %>
 
-  <div class="field">
-    <%= f.text_field :address, placeholder: 'Dirección' %>
-  </div>
+    <div class="field">
+      <%= f.text_field :name, placeholder: 'Nombre' %>
+    </div>
 
-  <div class="field">
-    <%= f.text_field :description, placeholder: 'Descripción' %>
-  </div>
+    <div class="field">
+      <%= f.text_field :address, placeholder: 'Dirección' %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Editar Campus" %>
-  </div>
+    <div class="field">
+      <%= f.text_field :description, placeholder: 'Descripción' %>
+    </div>
 
-<% end %>
+    <div class="actions">
+      <%= f.submit "Editar Campus" %>
+    </div>
 
-<%= link_to 'Mostrar', @venue %> |
-<%= link_to 'Volver', venues_path %>
+  <% end %>
+
+  <%= link_to 'Mostrar', @venue %> |
+  <%= link_to 'Volver', venues_path %>
+
+</div>

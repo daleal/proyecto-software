@@ -2,50 +2,53 @@
   <strong>Categoría:</strong>
   <%= @event.category %>
 </p>
+<div class="inner">
 
-<p>
-  <strong>Descripción:</strong>
-  <%= @event.description %>
-</p>
+  <p>
+    <strong>Descripción:</strong>
+    <%= @event.description %>
+  </p>
 
-<p>
-  <strong>Ramo:</strong>
-  <%= Course.find(@event.course_id).name %>
-</p>
+  <p>
+    <strong>Ramo:</strong>
+    <%= Course.find(@event.course_id).name %>
+  </p>
 
-<p>
-  <strong>Creado por: </strong><%= User.find(@event.created_by).email %>
-</p>
+  <p>
+    <strong>Creado por: </strong><%= User.find(@event.created_by).email %>
+  </p>
 
-<p>
-  <strong>Integrantes:</strong>
-  <% @event.users.each do |user|%>
-    <%= user.email %>
-  <% end %>
-</p>
+  <p>
+    <strong>Integrantes:</strong>
+    <% @event.users.each do |user|%>
+      <%= user.email %>
+    <% end %>
+  </p>
 
-<%=
-  if (@event.created_by == current_user.id) || current_user.administrator?
-    link_to 'Editar', edit_event_path(@event)
-  end
-%>
-
-<%=
-  not_joined = true
-  @event.users.each do |user|
-    if (current_user.id == user.id)
-      then not_joined = false
+  <%=
+    if (@event.created_by == current_user.id) || current_user.administrator?
+      link_to 'Editar', edit_event_path(@event)
     end
-  end
-  if (@event.created_by != current_user.email && not_joined) || current_user.administrator?
-    link_to 'Unirme', event_join_path(@event)
-  end
-%>
+  %>
 
-<%=
-  if (@event.created_by != current_user.email && !not_joined) || current_user.administrator?
-    link_to 'Salirme', event_leave_path(@event)
-  end
-%>
+  <%=
+    not_joined = true
+    @event.users.each do |user|
+      if (current_user.id == user.id)
+        then not_joined = false
+      end
+    end
+    if (@event.created_by != current_user.email && not_joined) || current_user.administrator?
+      link_to 'Unirme', event_join_path(@event)
+    end
+  %>
 
-<%= link_to 'Volver', course_events_path(@course) %>
+  <%=
+    if (@event.created_by != current_user.email && !not_joined) || current_user.administrator?
+      link_to 'Salirme', event_leave_path(@event)
+    end
+  %>
+
+  <%= link_to 'Volver', course_events_path(@course) %>
+
+</div>

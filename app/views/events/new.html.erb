@@ -1,21 +1,39 @@
-<h1>Crear nuevo evento</h1>
+<div class="inner">
 
-<%= form_for [@course, @event] do |f| %>
+  <h1>Crear nuevo evento</h1>
 
-  <div class="field">
-    <%= f.select :category, [['Grupo de Estudio', 'Grupo de Estudio'], ['Busco Clases', 'Busco Clases'], ['Ofrezco Clases', 'Ofrezco Clases']] %>
+  <%= form_for [@course, @event] do |f| %>
+
+    <div class="row gtr-uniform">
+
+      <div class="col-6 col-12-xsmall">
+        <%= f.select :category, [['Grupo de Estudio', 'Grupo de Estudio'], ['Busco Clases', 'Busco Clases'], ['Ofrezco Clases', 'Ofrezco Clases']] %>
+        <i>Categoría</i>
+      </div>
+
+      <div class="col-6 col-12-xsmall">
+        <%= f.collection_select :course_id, Course.order(:name), :id, :name %>
+        <i>Ramo al que pertenece</i>
+      </div>
+
+      <div class="col-12">
+        <%= f.text_field :description, placeholder: 'Descripción' %>
+      </div>
+
+      <div class="col-12">
+        <ul class="actions">
+          <li><%= f.submit "Crear Evento" %></li>
+        </ul>
+      </div>
+
+    </div>
+
+  <% end %>
+
+  <div class="col-12">
+    <ul class="actions">
+      <li><%= link_to 'Volver', course_events_path(@course), class: "button primary" %></li>
+    </ul>
   </div>
 
-  <div class="field">
-    <%= f.text_field :description, placeholder: 'Descripción' %>
-  </div>
-
-  <%= f.collection_select :course_id, Course.order(:name), :id, :name %>
-
-  <div class="actions">
-    <%= f.submit "Crear Evento" %>
-  </div>
-
-<% end %>
-
-<%= link_to 'Volver', course_events_path(@course) %>
+</div>

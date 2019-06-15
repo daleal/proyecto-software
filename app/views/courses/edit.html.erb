@@ -1,26 +1,30 @@
-<h1>Editar ramo</h1>
+<div class="inner">
 
-<%= form_for @course do |f| %>
+  <h1>Editar ramo</h1>
 
-  <div class="field">
-    <%= f.text_field :name, placeholder: 'Nombre' %>
-  </div>
+  <%= form_for @course do |f| %>
 
-  <div class="field">
-    <%= f.text_field :initials, placeholder: 'Iniciales' %>
-  </div>
+    <div class="field">
+      <%= f.text_field :name, placeholder: 'Nombre' %>
+    </div>
 
-  <div class="field">
-    <%= f.text_field :teacher_name, placeholder: 'Nombre del Profesor' %>
-  </div>
+    <div class="field">
+      <%= f.text_field :initials, placeholder: 'Iniciales' %>
+    </div>
 
-  <%= f.collection_select :room_id, Room.order(:number), :id, :number %>
+    <div class="field">
+      <%= f.text_field :teacher_name, placeholder: 'Nombre del Profesor' %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Editar ramo" %>
-  </div>
+    <%= f.collection_select :room_id, Room.order(:number), :id, :number %>
 
-<% end %>
+    <div class="actions">
+      <%= f.submit "Editar ramo" %>
+    </div>
 
-<%= link_to 'Mostrar', @course %> |
-<%= link_to 'Volver', room_courses_path(@room) %>
+  <% end %>
+
+  <%= link_to 'Mostrar', @course %> |
+  <%= link_to 'Volver', room_courses_path(@room) %>
+
+</div>
