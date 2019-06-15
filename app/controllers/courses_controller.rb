@@ -3,7 +3,14 @@ class CoursesController < ApplicationController
   before_action :access, only: %i[create update destroy]
 
   def catalog
-    @courses = Course.all
+    @q = params[:q]
+    
+    if @q
+      @courses = Course.where(room_id: @q), + Course.where(name: @q) + Course.where(initials: @q) + 
+      Course.where(teacher_name: @q)
+    else
+      @courses = Course.all
+    end
   end
 
   def index

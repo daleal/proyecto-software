@@ -7,12 +7,27 @@ class PublicationsController < ApplicationController
   helper_method :downvote
 
   def catalog
-    @publications = Publication.all
+    @q = params[:q]
+    
+    if @q
+      @publications = Publication.where(title: @q) + Publication.where(description: @q)
+    else
+      @courses = Course.all
+    end
   end
 
   def index
     @course = Course.find(params[:course_id])
-    @publications = Publication.where(course_id: params[:course_id])
+    
+    @q = params[:q]
+    
+    if @q
+      @publications = Publication.where(course_id: params[:course_id], title: @q) + Publication.where(course_id: params[:course_id], description: @q)
+    else
+      @publications = Publication.where(course_id: params[:course_id])
+    end
+    
+    
     moderator = ModeratorRequest.where(course_id: @course.id, user_id: current_user.id).first
     @is_moderator = !moderator.nil? && moderator.accepted?
     flash[:info] = "Vista de moderador." if @is_moderator
