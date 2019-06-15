@@ -9,7 +9,7 @@
 </p>
 
 <%=
-  if (@comment.created_by == current_user.email) || current_user.administrator?
+  if (@comment.created_by == current_user.id) || current_user.administrator?
     link_to 'Editar', edit_comment_path(@comment)
   end
 %>

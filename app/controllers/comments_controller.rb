@@ -27,7 +27,7 @@ class CommentsController < ApplicationController
   def create
     comment_data = comment_params
     comment_data[:comment_date] = Time.current
-    comment_data[:created_by] = current_user.email
+    comment_data[:created_by] = current_user.id
     @publication = Publication.find(params[:publication_id])
     @comment = @publication.comments.new(comment_data)
     if @comment.save
@@ -95,7 +95,7 @@ class CommentsController < ApplicationController
 
     moderator = ModeratorRequest.where(course_id: @publication.course_id, user_id: current_user.id).first
     @is_moderator = !moderator.nil? && moderator.accepted?
-    unless (@publication.created_by == current_user.email) || \
+    unless (@publication.created_by == current_user.id) || \
            current_user.administrator? || @is_moderator
       flash[:warning] = "No tienes permiso para ejecutar esta acción."
       redirect_to publication_comments_path(@publication)

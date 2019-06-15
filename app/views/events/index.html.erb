@@ -17,12 +17,12 @@
         <td><%= event.category %></td>
         <td><%= event.description %></td>
         <td><%= @course.name %></td>
-        <td><%= event.created_by %></td>
+        <td><%= User.find(event.created_by).email %></td>
         <td><%= link_to 'Mostrar', event %></td>
-        <td><%= if (event.created_by == current_user.email) || current_user.administrator? || @is_moderator
+        <td><%= if (event.created_by == current_user.id) || current_user.administrator? || @is_moderator
                   link_to 'Editar', edit_event_path(event)
                 end %></td>
-        <td><%= if (event.created_by == current_user.email) || current_user.administrator? || @is_moderator
+        <td><%= if (event.created_by == current_user.id) || current_user.administrator? || @is_moderator
                   link_to 'Eliminar', event, method: :delete, data: { confirm: '¿Estás seguro?' }
                 end %></td>
       </tr>

@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20190614162114) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "publication_id"
-    t.string "created_by"
+    t.integer "created_by"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20190614162114) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "course_id"
-    t.string "created_by"
+    t.integer "created_by"
   end
 
   create_table "moderator_requests", force: :cascade do |t|
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20190614162114) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "course_id"
-    t.string "created_by"
+    t.integer "created_by"
   end
 
   create_table "rooms", force: :cascade do |t|

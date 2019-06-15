@@ -28,7 +28,7 @@ class PublicationsController < ApplicationController
     @course = Course.find(params[:course_id])
     publication_data = publication_params
     publication_data[:publication_date] = Time.current
-    publication_data[:created_by] = current_user.email
+    publication_data[:created_by] = current_user.id
     publication_data[:course_id] = params[:course_id]
     @publication = Publication.new(publication_data)
     if @publication.save
@@ -100,7 +100,7 @@ class PublicationsController < ApplicationController
 
     moderator = ModeratorRequest.where(course_id: @course.id, user_id: current_user.id).first
     @is_moderator = !moderator.nil? && moderator.accepted?
-    unless (@publication.created_by == current_user.email) || \
+    unless (@publication.created_by == current_user.id) || \
            current_user.administrator? || @is_moderator
       flash[:warning] = "No tienes permiso para ejecutar esta acción."
       redirect_to course_publications_path(@course)

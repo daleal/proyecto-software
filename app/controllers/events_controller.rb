@@ -23,7 +23,7 @@ class EventsController < ApplicationController
   def create
     @course = Course.find(params[:course_id])
     @event = Event.new(event_params)
-    @event.created_by = current_user.email
+    @event.created_by = current_user.id
     if @event.save
       flash[:success] = "Se ha creado un evento del tipo "\
                         "#{@event.category} correctamente."
@@ -74,7 +74,7 @@ class EventsController < ApplicationController
 
     moderator = ModeratorRequest.where(course_id: @course.id, user_id: current_user.id).first
     @is_moderator = !moderator.nil? && moderator.accepted?
-    unless (@publication.created_by == current_user.email) || \
+    unless (@publication.created_by == current_user.id) || \
            current_user.administrator? || @is_moderator
       flash[:warning] = "No tienes permiso para ejecutar esta acción."
       redirect_to course_events_path(@course)
