@@ -60,7 +60,8 @@ class EventsController < ApplicationController
   end
 
   def join
-    @event = Event.find_by_id(params[:event_id])
+    @event = Event.find(params[:event_id])
+    @course = Course.find(@event.course_id)
     @event.users.push(current_user)
     if @event.save
       flash[:success] = "Te has unido al evento "\
@@ -68,11 +69,12 @@ class EventsController < ApplicationController
     else
       flash[:warning] = "No te has podido unir evento."
     end
-    redirect_to show_event_path
+    redirect_to course_events_path(@course)
   end
 
   def leave
-    @event = Event.find_by_id(params[:event_id])
+    @event = Event.find(params[:event_id])
+    @course = Course.find(@event.course_id)
     @event.users.delete(current_user)
     if @event.save
       flash[:success] = "Has dejado el evento "\
@@ -80,7 +82,7 @@ class EventsController < ApplicationController
     else
       flash[:warning] = "No has podido dejar evento."
     end
-    redirect_to events_path
+    redirect_to course_events_path(@course)
   end
 
   private
@@ -99,8 +101,7 @@ class EventsController < ApplicationController
 
     moderator = ModeratorRequest.where(course_id: @course.id, user_id: current_user.id).first
     @is_moderator = !moderator.nil? && moderator.accepted?
-    unless (@publication.created_by == current_user.id) || \
-           current_user.administrator? || @is_moderator
+    unless current_user.administrator? || @is_moderator
       flash[:warning] = "No tienes permiso para ejecutar esta acción."
       redirect_to course_events_path(@course)
     end

@@ -14,11 +14,6 @@
 </p>
 
 <p>
-  <strong>Sala:</strong>
-  <%= Room.find(@event.room_id).number %>
-</p>
-
-<p>
   <strong>Creado por: </strong><%= User.find(@event.created_by).email %>
 </p>
 
@@ -29,8 +24,6 @@
   <% end %>
 </p>
 
-<%= link_to 'Publicaciones', event_publications_path(@event) %>
-
 <%=
   if (@event.created_by == current_user.id) || current_user.administrator?
     link_to 'Editar', edit_event_path(@event)
@@ -40,7 +33,7 @@
 <%=
   not_joined = true
   @event.users.each do |user|
-    if (current_user.id == user.id) 
+    if (current_user.id == user.id)
       then not_joined = false
     end
   end
@@ -55,4 +48,4 @@
   end
 %>
 
-<%= link_to 'Volver', events_path %>
+<%= link_to 'Volver', course_events_path(@course) %>

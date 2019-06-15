@@ -14,9 +14,13 @@
 </p>
 
 <p>
-  <strong>Campus:</strong>
-  <%= Venue.find(@course.venue_id).name %>
+  <strong>Sala:</strong>
+  <%= Room.find(@course.room_id).number %>
 </p>
+
+<%= link_to 'Eventos', course_events_path(@course) %>
+
+<%= link_to 'Publicaciones', course_publications_path(@course) %>
 
 <%=
   if current_user.administrator? || @is_moderator

@@ -9,7 +9,10 @@ class CommentsController < ApplicationController
   def index
     @publication = Publication.find(params[:publication_id])
     @comments = Comment.where(publication_id: params[:publication_id])
-    moderator = ModeratorRequest.where(course_id: @publication.course_id, user_id: current_user.id).first
+    moderator = ModeratorRequest.where(
+      course_id: @publication.course_id,
+      user_id: current_user.id
+    ).first
     @is_moderator = !moderator.nil? && moderator.accepted?
     flash[:info] = "Vista de moderador." if @is_moderator
   end
