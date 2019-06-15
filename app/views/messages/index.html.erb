@@ -1,0 +1,27 @@
+<h1>Convesación</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Emisor</th>
+      <th>Fecha</th>
+      <th>Asunto</th>
+      <th>Contenido</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @messages.each do |message| %>
+      <tr>
+        <td><%= User.find(message.user_id).email %></td>
+        <td><%= message.message_time %></td>
+        <td><%= message.subject %></td>
+        <td><%= message.body %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<p>Crear Nuevo</p>

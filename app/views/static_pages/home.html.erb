@@ -22,6 +22,15 @@
           <%= image_tag("pic01.jpg") %>
         </span>
         <header class="major">
+          <h3><%= link_to "Mensajería", conversations_url, class: "link" %></h3>
+          <p><b>Conéctate</b> con todos los usuarios registrados de la plataforma.</p>
+        </header>
+      </article>
+      <article>
+        <span class="image">
+          <%= image_tag("pic01.jpg") %>
+        </span>
+        <header class="major">
           <h3><%= link_to "Campuses", venues_url, class: "link" %></h3>
           <p><b>Conoce</b> todos los campus existentes en nuestra plataforma.</p>
         </header>
@@ -75,7 +84,7 @@
           <% else %>
             <h3><%= link_to "Regístrate!", new_user_registration_url, class: "link" %></h3>
           <% end %>
-          <p>¿Quieres ser ultra seco? Úete a nuestra comunidad.</p>
+          <p>¿Quieres ser ultra seco? Únete a nuestra comunidad.</p>
         </header>
       </article>
     </section>
