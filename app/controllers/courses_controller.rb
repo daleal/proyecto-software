@@ -8,7 +8,15 @@ class CoursesController < ApplicationController
 
   def index
     @room = Room.find(params[:room_id])
-    @courses = Course.where(room_id: params[:room_id])
+    @q = params[:q]
+    
+    if @q
+      @courses = Course.where(room_id: params[:room_id], name: @q) + Course.where(room_id: params[:room_id], initials: @q) + 
+      Course.where(room_id: params[:room_id], teacher_name: @q)
+    else
+      @courses = Course.where(room_id: params[:room_id])
+    end
+
   end
 
   def show

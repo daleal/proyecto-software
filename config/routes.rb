@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :rooms do
 
       resources :courses do
+        
         resources :moderator_requests
 
         resources :events do
