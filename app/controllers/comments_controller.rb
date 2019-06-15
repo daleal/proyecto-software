@@ -9,9 +9,9 @@ class CommentsController < ApplicationController
   def index
     @publication = Publication.find(params[:publication_id])
     @comments = Comment.where(publication_id: params[:publication_id])
-    moderator = ModeratorRequest.where(course_id: @course.id, user_id: current_user.id).first
+    moderator = ModeratorRequest.where(course_id: @publication.course_id, user_id: current_user.id).first
     @is_moderator = !moderator.nil? && moderator.accepted?
-    flash[:info] = "Eres MODERADOR de este ramo." if @is_moderator
+    flash[:info] = "Vista de moderador." if @is_moderator
   end
 
   def show
@@ -46,13 +46,10 @@ class CommentsController < ApplicationController
   def update
     @comment = Comment.find(params[:id])
     @publication = Publication.find(@comment.publication_id)
-    if (@comment.created_by == current_user.email) || \
-       current_user.administrator? || @is_moderator
-      if @comment.update_attributes(comment_params)
-        flash[:success] = "Se ha editado el comentario correctamente."
-      else
-        flash[:warning] = "No se ha podido editar el comentario."
-      end
+    if @comment.update_attributes(comment_params)
+      flash[:success] = "Se ha editado el comentario correctamente."
+    else
+      flash[:warning] = "No se ha podido editar el comentario."
     end
     redirect_to publication_comments_path(@publication)
   end
@@ -60,11 +57,8 @@ class CommentsController < ApplicationController
   def destroy
     @comment = Comment.find(params[:id])
     @publication = Publication.find(@comment.publication_id)
-    if (@comment.created_by == current_user.email) || \
-       current_user.administrator? || @is_moderator
-      @comment.destroy
-      flash[:success] = "Se ha eliminado el comentario correctamente."
-    end
+    @comment.destroy
+    flash[:success] = "Se ha eliminado el comentario correctamente."
     redirect_to publication_comments_path(@publication)
   end
 
@@ -99,7 +93,7 @@ class CommentsController < ApplicationController
       @publication = Publication.find(@comment.publication_id)
     end
 
-    moderator = ModeratorRequest.where(course_id: @course.id, user_id: current_user.id).first
+    moderator = ModeratorRequest.where(course_id: @publication.course_id, user_id: current_user.id).first
     @is_moderator = !moderator.nil? && moderator.accepted?
     unless (@publication.created_by == current_user.email) || \
            current_user.administrator? || @is_moderator

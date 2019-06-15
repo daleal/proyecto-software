@@ -7,7 +7,7 @@ class ModeratorRequestsController < ApplicationController
     @moderator_requests = ModeratorRequest.where(course_id: params[:course_id])
     moderator = ModeratorRequest.where(course_id: @course.id, user_id: current_user.id).first
     @is_moderator = !moderator.nil? && moderator.accepted?
-    flash[:info] = "Eres MODERADOR de este ramo." if @is_moderator
+    flash[:info] = "Vista de moderador." if @is_moderator
   end
 
   def new
@@ -40,12 +40,10 @@ class ModeratorRequestsController < ApplicationController
   def update
     @moderator_request = ModeratorRequest.find(params[:id])
     @course = Course.find(@moderator_request.course_id)
-    if current_user.administrator? || @is_moderator
-      if @moderator_request.update_attributes(moderator_request_params)
-        flash[:success] = "Se ha respondido a la solicitud correctamente."
-      else
-        flash[:warning] = "No se ha podido responder a la solicitud."
-      end
+    if @moderator_request.update_attributes(moderator_request_params)
+      flash[:success] = "Se ha respondido a la solicitud correctamente."
+    else
+      flash[:warning] = "No se ha podido responder a la solicitud."
     end
     redirect_to course_moderator_requests_path(@course)
   end
@@ -53,11 +51,8 @@ class ModeratorRequestsController < ApplicationController
   def destroy
     @moderator_request = ModeratorRequest.find(params[:id])
     @course = Course.find(@moderator_request.course_id)
-    if (@moderator_request.user_id == current_user.id) || \
-       current_user.administrator? || @is_moderator
-      @moderator_request.destroy
-      flash[:warning] = "Se ha eliminado en comentario correctamente."
-    end
+    @moderator_request.destroy
+    flash[:warning] = "Se ha eliminado en comentario correctamente."
     redirect_to course_moderator_requests_path(@course)
   end
 

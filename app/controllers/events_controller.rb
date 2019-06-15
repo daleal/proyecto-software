@@ -7,7 +7,7 @@ class EventsController < ApplicationController
     @events = Event.where(course_id: params[:course_id])
     moderator = ModeratorRequest.where(course_id: @course.id, user_id: current_user.id).first
     @is_moderator = !moderator.nil? && moderator.accepted?
-    flash[:info] = "Eres MODERADOR de este ramo." if @is_moderator
+    flash[:info] = "Vista de moderador." if @is_moderator
   end
 
   def show
@@ -41,14 +41,11 @@ class EventsController < ApplicationController
   def update
     @event = Event.find(params[:id])
     @course = Course.find(@event.course_id)
-    if (@event.created_by == current_user.email) || \
-       current_user.administrator? || @is_moderator
-      if @event.update_attributes(event_params)
-        flash[:success] = "Se ha editado un evento del tipo "\
-                          "#{@event.category} correctamente."
-      else
-        flash[:warning] = "No se ha podido editar el evento."
-      end
+    if @event.update_attributes(event_params)
+      flash[:success] = "Se ha editado un evento del tipo "\
+                        "#{@event.category} correctamente."
+    else
+      flash[:warning] = "No se ha podido editar el evento."
     end
     redirect_to course_events_path(@course)
   end
@@ -56,11 +53,8 @@ class EventsController < ApplicationController
   def destroy
     @event = Event.find(params[:id])
     @course = Course.find(@event.course_id)
-    if (@event.created_by == current_user.email) || \
-       current_user.administrator? || @is_moderator
-      @event.destroy
-      flash[:success] = "Se ha eliminado el evento correctamente."
-    end
+    @event.destroy
+    flash[:success] = "Se ha eliminado el evento correctamente."
     redirect_to course_events_path(@course)
   end
 

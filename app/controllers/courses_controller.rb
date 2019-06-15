@@ -12,7 +12,7 @@ class CoursesController < ApplicationController
     @room = Room.find(@course.room_id)
     moderator = ModeratorRequest.where(course_id: @course.id, user_id: current_user.id).first
     @is_moderator = !moderator.nil? && moderator.accepted?
-    flash[:info] = "Eres MODERADOR de este ramo." if @is_moderator
+    flash[:info] = "Vista de moderador." if @is_moderator
   end
 
   def new

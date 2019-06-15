@@ -11,7 +11,7 @@ class PublicationsController < ApplicationController
     @publications = Publication.where(course_id: params[:course_id])
     moderator = ModeratorRequest.where(course_id: @course.id, user_id: current_user.id).first
     @is_moderator = !moderator.nil? && moderator.accepted?
-    flash[:info] = "Eres MODERADOR de este ramo." if @is_moderator
+    flash[:info] = "Vista de moderador." if @is_moderator
   end
 
   def show
@@ -49,14 +49,11 @@ class PublicationsController < ApplicationController
   def update
     @publication = Publication.find(params[:id])
     @course = Course.find(@publication.course_id)
-    if (@publication.created_by == current_user.email) || \
-       current_user.administrator? || @is_moderator
-      if @publication.update_attributes(publication_params)
-        flash[:success] = "Se ha editado la publicación con el título "\
-                          "#{@publication.title} correctamente."
-      else
-        flash[:warning] = "No se ha podido editar la publicación."
-      end
+    if @publication.update_attributes(publication_params)
+      flash[:success] = "Se ha editado la publicación con el título "\
+                        "#{@publication.title} correctamente."
+    else
+      flash[:warning] = "No se ha podido editar la publicación."
     end
     redirect_to course_publications_path(@course)
   end
@@ -64,11 +61,8 @@ class PublicationsController < ApplicationController
   def destroy
     @publication = Publication.find(params[:id])
     @course = Course.find(@publication.course_id)
-    if (@publication.created_by == current_user.email) || \
-       current_user.administrator? || @is_moderator
-      @publication.destroy
-      flash[:success] = "Se ha eliminado la publicación correctamente."
-    end
+    @publication.destroy
+    flash[:success] = "Se ha eliminado la publicación correctamente."
     redirect_to course_publications_path(@course)
   end
 
@@ -102,6 +96,7 @@ class PublicationsController < ApplicationController
       @publication = Publication.find(params[:id])
       @course = Course.find(@publication.course_id)
     end
+
 
     moderator = ModeratorRequest.where(course_id: @course.id, user_id: current_user.id).first
     @is_moderator = !moderator.nil? && moderator.accepted?
