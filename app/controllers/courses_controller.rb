@@ -6,7 +6,7 @@ class CoursesController < ApplicationController
     @q = params[:q]
     
     if @q
-      @courses = Course.where(room_id: @q), + Course.where(name: @q) + Course.where(initials: @q) + 
+      @courses = Course.where(room_id: @q) + Course.where(name: @q) + Course.where(initials: @q) + 
       Course.where(teacher_name: @q)
     else
       @courses = Course.all

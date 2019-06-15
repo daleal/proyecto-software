@@ -6,7 +6,7 @@ class EventsController < ApplicationController
     @q = params[:q]
     
     if @q
-      @events = Event.where(category: @q), + Course.where(description: @q)
+      @events = Event.where(category: @q) + Course.where(description: @q)
     else
       @events = Event.all
     end
