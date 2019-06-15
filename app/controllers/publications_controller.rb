@@ -9,6 +9,9 @@ class PublicationsController < ApplicationController
   def index
     @course = Course.find(params[:course_id])
     @publications = Publication.where(course_id: params[:course_id])
+    moderator = ModeratorRequest.where(course_id: @course.id, user_id: current_user.id).first
+    @is_moderator = !moderator.nil? && moderator.accepted?
+    flash[:info] = "Vista de moderador." if @is_moderator
   end
 
   def show
@@ -25,7 +28,7 @@ class PublicationsController < ApplicationController
     @course = Course.find(params[:course_id])
     publication_data = publication_params
     publication_data[:publication_date] = Time.current
-    publication_data[:created_by] = current_user.email
+    publication_data[:created_by] = current_user.id
     publication_data[:course_id] = params[:course_id]
     @publication = Publication.new(publication_data)
     if @publication.save
@@ -46,14 +49,11 @@ class PublicationsController < ApplicationController
   def update
     @publication = Publication.find(params[:id])
     @course = Course.find(@publication.course_id)
-    if (@publication.created_by == current_user.email) || \
-       current_user.administrator?
-      if @publication.update_attributes(publication_params)
-        flash[:success] = "Se ha editado la publicación con el título "\
-                          "#{@publication.title} correctamente."
-      else
-        flash[:warning] = "No se ha podido editar la publicación."
-      end
+    if @publication.update_attributes(publication_params)
+      flash[:success] = "Se ha editado la publicación con el título "\
+                        "#{@publication.title} correctamente."
+    else
+      flash[:warning] = "No se ha podido editar la publicación."
     end
     redirect_to course_publications_path(@course)
   end
@@ -61,11 +61,8 @@ class PublicationsController < ApplicationController
   def destroy
     @publication = Publication.find(params[:id])
     @course = Course.find(@publication.course_id)
-    if (@publication.created_by == current_user.email) || \
-       current_user.administrator?
-      @publication.destroy
-      flash[:success] = "Se ha eliminado la publicación correctamente."
-    end
+    @publication.destroy
+    flash[:success] = "Se ha eliminado la publicación correctamente."
     redirect_to course_publications_path(@course)
   end
 
@@ -99,8 +96,12 @@ class PublicationsController < ApplicationController
       @publication = Publication.find(params[:id])
       @course = Course.find(@publication.course_id)
     end
-    unless (@publication.created_by == current_user.email) || \
-           current_user.administrator?
+
+
+    moderator = ModeratorRequest.where(course_id: @course.id, user_id: current_user.id).first
+    @is_moderator = !moderator.nil? && moderator.accepted?
+    unless (@publication.created_by == current_user.id) || \
+           current_user.administrator? || @is_moderator
       flash[:warning] = "No tienes permiso para ejecutar esta acción."
       redirect_to course_publications_path(@course)
     end
