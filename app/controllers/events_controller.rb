@@ -2,6 +2,10 @@ class EventsController < ApplicationController
   before_action :authenticate_user!
   before_action :access, only: %i[update destroy]
 
+  def catalog
+    @events = Event.all
+  end
+
   def index
     @course = Course.find(params[:course_id])
     @events = Event.where(course_id: params[:course_id])

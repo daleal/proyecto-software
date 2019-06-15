@@ -6,6 +6,10 @@ class PublicationsController < ApplicationController
   helper_method :upvote
   helper_method :downvote
 
+  def catalog
+    @publications = Publication.all
+  end
+
   def index
     @course = Course.find(params[:course_id])
     @publications = Publication.where(course_id: params[:course_id])

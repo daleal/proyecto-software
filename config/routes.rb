@@ -2,7 +2,10 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  # resources :moderator_requests
+  get 'rooms/catalog', to: 'rooms#catalog'
+  get 'courses/catalog', to: 'courses#catalog'
+  get 'events/catalog', to: 'events#catalog'
+  get 'publications/catalog', to: 'publications#catalog'
 
   resources :venues, shallow: true do
 
@@ -32,7 +35,6 @@ Rails.application.routes.draw do
       end
     end
   end
-
 
   root 'static_pages#home'
 end

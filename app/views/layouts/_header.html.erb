@@ -12,11 +12,10 @@
   <ul class="links">
     <li><%= link_to "Inicio", root_url %></li>
     <li><%= link_to "Campuses", venues_url %></li>
-    <!--
-    <li><%#= link_to "Eventos", events_url %></li>
-    <li><%#= link_to "Salas de Estudio", rooms_url %></li>
-    <li><%#= link_to "Ramos", courses_url %></li>
-    -->
+    <li><%= link_to "Salas de Estudio", rooms_catalog_url %></li>
+    <li><%= link_to "Ramos", courses_catalog_url %></li>
+    <li><%= link_to "Eventos", events_catalog_url %></li>
+    <li><%= link_to "Publicaciones", publications_catalog_url %></li>
   </ul>
   <ul class="actions stacked">
     <% if user_signed_in? %>

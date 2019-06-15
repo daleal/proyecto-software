@@ -2,6 +2,10 @@ class CoursesController < ApplicationController
   before_action :authenticate_user!
   before_action :access, only: %i[create update destroy]
 
+  def catalog
+    @courses = Course.all
+  end
+
   def index
     @room = Room.find(params[:room_id])
     @courses = Course.where(room_id: params[:room_id])
