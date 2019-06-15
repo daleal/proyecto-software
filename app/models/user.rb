@@ -15,4 +15,6 @@ class User < ApplicationRecord
     self.role ||= :common
   end
 
+  acts_as_voter
+
 end

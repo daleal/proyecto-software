@@ -15,14 +15,26 @@
       <tr>
         <td><%= comment.content %></td>
         <td><%= comment.comment_date.strftime("%d/%m/%y: %H:%M:%S") %></td>
-        <td><%= comment.created_by %></td>
-        <td><%= link_to 'Mostrar', publication_comment_path(@publication, comment) %></td>
-        <td><%= if (comment.created_by == current_user.email) || current_user.administrator?
-                  link_to 'Editar', edit_publication_comment_path(@publication, comment)
+        <td><%= User.find(comment.created_by).email %></td>
+        <td><%= link_to 'Mostrar', comment %></td>
+        <td><%= if (comment.created_by == current_user.id) || current_user.administrator? || @is_moderator
+                  link_to 'Editar', edit_comment_path(comment)
                 end %></td>
-        <td><%= if (comment.created_by == current_user.email) || current_user.administrator?
-                  link_to 'Eliminar', publication_comment_path(@publication, comment), method: :delete, data: { confirm: '¿Estás seguro?' }
+        <td><%= if (comment.created_by == current_user.id) || current_user.administrator? || @is_moderator
+                  link_to 'Eliminar', comment, method: :delete, data: { confirm: '¿Estás seguro?' }
                 end %></td>
+        <td><%= link_to like_comment_path(comment), class: "like", method: :put do %>
+              <button type="button" class="btn btn-info" aria-label="Left Align">
+                <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
+                <span class="badge"><%= comment.get_upvotes.size %></span>
+              </button>
+            <% end %>
+        <td><%= link_to dislike_comment_path(comment), class: "like", method: :put do %>
+              <button type="button" class="btn btn-info" aria-label="Left Align">
+                <span class="glyphicon glyphicon-thumbs-down glyphicon-align-center" aria-hidden="true"></span>
+                <span class="badge"><%= comment.get_downvotes.size %></span>
+              </button>
+            <% end %>
       </tr>
     <% end %>
   </tbody>

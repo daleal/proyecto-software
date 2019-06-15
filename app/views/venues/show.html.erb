@@ -13,6 +13,8 @@
   <%= @venue.description %>
 </p>
 
+<%= link_to 'Salas', venue_rooms_path(@venue) %>
+
 <%=
   if current_user.administrator?
     link_to 'Editar', edit_venue_path(@venue)

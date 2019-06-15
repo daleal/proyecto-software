@@ -1,6 +1,6 @@
 <h1>Editar Comentario</h1>
 
-<%= form_for [@publication, @comment] do |f| %>
+<%= form_for @comment do |f| %>
 
   <div class="field">
     <%= f.text_area :content, placeholder: 'Contenido' %>
@@ -12,5 +12,5 @@
 
 <% end %>
 
-<%= link_to 'Mostrar', publication_comment_path(@publication, @comment) %> |
-<%= link_to 'Volver', publication_comments_path %>
+<%= link_to 'Mostrar', @comment %> |
+<%= link_to 'Volver', publication_comments_path(@publication) %>

@@ -17,14 +17,26 @@
         <td><%= publication.title %></td>
         <td><%= publication.description %></td>
         <td><%= publication.publication_date.strftime("%d/%m/%y: %H:%M:%S") %></td>
-        <td><%= publication.created_by %></td>
-        <td><%= link_to 'Mostrar', event_publication_path(@event, publication) %></td>
-        <td><%= if (publication.created_by == current_user.email) || current_user.administrator?
-                  link_to 'Editar', edit_event_publication_path(@event, publication)
+        <td><%= User.find(publication.created_by).email %></td>
+        <td><%= link_to 'Mostrar', publication %></td>
+        <td><%= if (publication.created_by == current_user.id) || current_user.administrator? || @is_moderator
+                  link_to 'Editar', edit_publication_path(publication)
                 end %></td>
-        <td><%= if (publication.created_by == current_user.email) || current_user.administrator?
-                  link_to 'Eliminar', event_publication_path(@event, publication), method: :delete, data: { confirm: '¿Estás seguro?' }
+        <td><%= if (publication.created_by == current_user.id) || current_user.administrator? || @is_moderator
+                  link_to 'Eliminar', publication, method: :delete, data: { confirm: '¿Estás seguro?' }
                 end %></td>
+        <td><%= link_to like_publication_path(publication), class: "like", method: :put do %>
+              <button type="button" class="btn btn-info" aria-label="Left Align">
+                <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
+                <span class="badge"><%= publication.get_upvotes.size %></span>
+              </button>
+            <% end %>
+        <td><%= link_to dislike_publication_path(publication), class: "like", method: :put do %>
+              <button type="button" class="btn btn-info" aria-label="Left Align">
+                <span class="glyphicon glyphicon-thumbs-down glyphicon-align-center" aria-hidden="true"></span>
+                <span class="badge"><%= publication.get_downvotes.size %></span>
+              </button>
+            <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -32,4 +44,4 @@
 
 <br>
 
-<%= link_to 'Crear nueva', new_event_publication_path %>
+<%= link_to 'Crear nueva', new_course_publication_path(@course) %>

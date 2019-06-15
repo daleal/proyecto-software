@@ -12,6 +12,7 @@ gem 'pg',                      '0.20.0'
 gem 'rubocop'
 gem 'devise'
 gem 'bootstrap-sass'
+gem 'acts_as_votable', '~> 0.12.0'
 
 group :development, :test do
   gem 'byebug',  '9.0.6', platform: :mri

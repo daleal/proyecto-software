@@ -15,8 +15,18 @@ Rails.application.routes.draw do
   resources :events do
     get 'join'
     get 'leave'
+    
     resources :publications do
-      resources :comments
+      member do
+        put "like" => "publications#upvote"
+        put "dislike" => "publications#downvote"
+      end
+      
+      resources :comments do
+        member do
+          put "like" => "comments#upvote"
+          put "dislike" => "comments#downvote"
+        end
     end
   end
 

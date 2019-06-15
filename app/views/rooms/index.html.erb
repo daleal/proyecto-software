@@ -30,6 +30,6 @@
 
 <%=
   if current_user.administrator?
-    link_to 'Crear nuevo', new_room_path
+    link_to 'Crear nuevo', new_venue_room_path(@venue)
   end
 %>

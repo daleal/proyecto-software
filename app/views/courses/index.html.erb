@@ -34,6 +34,6 @@
 
 <%=
   if current_user.administrator?
-    link_to 'Crear nuevo', new_course_path
+    link_to 'Crear nuevo', new_room_course_path(@room)
   end
 %>

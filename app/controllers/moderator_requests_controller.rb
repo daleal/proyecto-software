@@ -7,9 +7,7 @@ class ModeratorRequestsController < ApplicationController
     @moderator_requests = ModeratorRequest.where(course_id: params[:course_id])
     moderator = ModeratorRequest.where(course_id: @course.id, user_id: current_user.id).first
     @is_moderator = !moderator.nil? && moderator.accepted?
-    if @is_moderator
-      flash[:info] = "¡Eres MODERADOR de este ramo!"
-    end
+    flash[:info] = "Vista de moderador." if @is_moderator
   end
 
   def new
@@ -31,34 +29,31 @@ class ModeratorRequestsController < ApplicationController
     else
       flash[:warning] = "Ya tienes una solicitud creada para este curso."
     end
-    redirect_to course_moderator_requests_path
+    redirect_to course_moderator_requests_path(@course)
   end
 
   def edit
-    @course = Course.find(params[:course_id])
     @moderator_request = ModeratorRequest.find(params[:id])
+    @course = Course.find(@moderator_request.course_id)
   end
 
   def update
     @moderator_request = ModeratorRequest.find(params[:id])
-    if current_user.administrator?
-      if @moderator_request.update_attributes(moderator_request_params)
-        flash[:success] = "Se ha respondido a la solicitud correctamente."
-      else
-        flash[:warning] = "No se ha podido responder a la solicitud."
-      end
+    @course = Course.find(@moderator_request.course_id)
+    if @moderator_request.update_attributes(moderator_request_params)
+      flash[:success] = "Se ha respondido a la solicitud correctamente."
+    else
+      flash[:warning] = "No se ha podido responder a la solicitud."
     end
-    redirect_to course_moderator_requests_path
+    redirect_to course_moderator_requests_path(@course)
   end
 
   def destroy
     @moderator_request = ModeratorRequest.find(params[:id])
-    if (@moderator_request.user_id == current_user.id) || \
-       current_user.administrator?
-      @moderator_request.destroy
-      flash[:warning] = "Se ha eliminado en comentario correctamente."
-    end
-    redirect_to course_moderator_requests_path
+    @course = Course.find(@moderator_request.course_id)
+    @moderator_request.destroy
+    flash[:warning] = "Se ha eliminado en comentario correctamente."
+    redirect_to course_moderator_requests_path(@course)
   end
 
   private
@@ -69,10 +64,13 @@ class ModeratorRequestsController < ApplicationController
 
   def access
     @moderator_request = ModeratorRequest.find(params[:id])
+
+    moderator = ModeratorRequest.where(course_id: @course.id, user_id: current_user.id).first
+    @is_moderator = !moderator.nil? && moderator.accepted?
     unless (@moderator_request.user_id == current_user.id) || \
-           current_user.administrator?
+           current_user.administrator? || @is_moderator
       flash[:warning] = "No tienes permiso para ejecutar esta acción."
-      redirect_to course_moderator_requests_path
+      redirect_to course_moderator_requests_path(@course)
     end
   end
 

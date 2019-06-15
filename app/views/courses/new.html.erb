@@ -1,6 +1,6 @@
 <h1>Crear ramo</h1>
 
-<%= form_for @course do |f| %>
+<%= form_for [@room, @course] do |f| %>
 
   <div class="field">
     <%= f.text_field :name, placeholder: 'Nombre' %>
@@ -22,4 +22,4 @@
 
 <% end %>
 
-<%= link_to 'Volver', courses_path %>
+<%= link_to 'Volver', room_courses_path(@room) %>

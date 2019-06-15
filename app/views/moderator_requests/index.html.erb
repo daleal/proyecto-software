@@ -18,11 +18,11 @@
         <td><%= moderator_request.content %></td>
         <td><%= moderator_request.created_at.strftime("%d/%m/%y: %H:%M:%S") %></td>
         <td><%= moderator_request.status %></td>
-        <td><%= if current_user.administrator? || @is_moderator
-                  link_to 'Responder', edit_course_moderator_request_path(@course, moderator_request)
+        <td><%= if (current_user.administrator?) ||(@is_moderator && moderator_request.pending?)
+                  link_to 'Actualizar estado', edit_moderator_request_path(moderator_request)
                 end %><td/>
         <td><%= if (moderator_request.user_id == current_user.id)
-                  link_to 'Cancelar', course_moderator_request_path(@course, moderator_request), method: :delete, data: { confirm: '¿Estás seguro?' }
+                  link_to 'Cancelar', moderator_request, method: :delete, data: { confirm: '¿Estás seguro?' }
                 end %></td>
       </tr>
     <% end %>

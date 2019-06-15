@@ -50,6 +50,10 @@ Rails/ActiveRecordAliases:
 Style/EmptyMethod:
   Enabled: false
 
+# Disable frozen string literal check
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
 # Let the coder put code inside ifs
 Style/GuardClause:
   Enabled: false
