@@ -12,7 +12,7 @@ class PublicationsController < ApplicationController
     if @q
       @publications = Publication.where(title: @q) + Publication.where(description: @q)
     else
-      @courses = Course.all
+      @publications = Publication.all
     end
   end
 

@@ -8,7 +8,7 @@ class RoomsController < ApplicationController
     if @q
       @rooms = Room.where(room_id: @q)
     else
-      @courses = Course.all
+      @rooms = Room.all
     end
   end
 

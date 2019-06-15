@@ -8,7 +8,7 @@ class EventsController < ApplicationController
     if @q
       @events = Event.where(category: @q), + Course.where(description: @q)
     else
-      @courses = Course.all
+      @events = Event.all
     end
   end
 
