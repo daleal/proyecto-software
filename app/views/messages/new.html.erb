@@ -1,2 +1,39 @@
-<h1>Messages#new</h1>
-<p>Find me in app/views/messages/new.html.erb</p>
+<div class="inner">
+
+  <header class="major">
+    <h1>Enviar un mensaje</h1>
+  </header>
+
+  <%= form_for [@conversation, @message] do |f| %>
+
+    <div class="row gtr-uniform">
+
+      <div class="col-12">
+        <%= f.text_field :subject, placeholder: 'Título del mensaje' %>
+      </div>
+
+      <div class="col-12">
+        <%= f.text_area :body, placeholder: 'Cuerpo del mensaje' %>
+      </div>
+
+      <%= f.hidden_field :conversation_id, value: @conversation.id %>
+
+      <%= f.hidden_field :user_id, value: current_user.id %>
+
+      <div class="col-12">
+        <ul class="actions">
+          <li><%= f.submit "Enviar mensaje" %></li>
+        </ul>
+      </div>
+
+    </div>
+
+  <% end %>
+
+  <div class="col-12">
+    <ul class="actions">
+      <li><%= link_to 'Cancelar', :back, class: "button primary" %></li>
+    </ul>
+  </div>
+
+</div>
