@@ -3,7 +3,12 @@ class VenuesController < ApplicationController
   before_action :access, only: %i[update destroy]
 
   def index
-    @venues = Venue.all
+    @q = params[:q]
+    if @q
+      @venues = Venue.where(name: @q)
+    else
+      @venues = Venue.all
+    end
   end
 
   def show
