@@ -1,5 +1,6 @@
 <div class="inner">
 
+
   <header class="major">
     <h1>Lista de ramos creados</h1>
   </header>
@@ -36,6 +37,7 @@
           <% else %>
             <th colspan="1"></th>
           <% end %>
+
         </tr>
       </thead>
 
@@ -53,6 +55,7 @@
             <% if current_user.administrator? %>
               <td><%= link_to 'Eliminar', course, method: :delete, data: { confirm: '¿Estás seguro?' } %></td>
             <% end %>
+
           </tr>
         <% end %>
       </tbody>

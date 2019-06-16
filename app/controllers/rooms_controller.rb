@@ -7,6 +7,7 @@ class RoomsController < ApplicationController
 
     if @q
       @rooms = Room.where(number: @q)
+
     else
       @rooms = Room.all
     end
@@ -14,14 +15,15 @@ class RoomsController < ApplicationController
 
   def index
     @venue = Venue.find(params[:venue_id])
+
     @q = params[:q]
 
     if @q
       @rooms = Room.where(venue_id: params[:venue_id], number: @q)
+
     else
       @rooms = Room.where(venue_id: params[:venue_id])
     end
-
 
   end
 

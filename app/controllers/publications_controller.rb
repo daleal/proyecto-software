@@ -27,7 +27,6 @@ class PublicationsController < ApplicationController
       @publications = Publication.where(course_id: params[:course_id])
     end
 
-
     moderator = ModeratorRequest.where(course_id: @course.id, user_id: current_user.id).first
     @is_moderator = !moderator.nil? && moderator.accepted?
     flash[:info] = "Vista de moderador." if @is_moderator
