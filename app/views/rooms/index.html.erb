@@ -1,7 +1,7 @@
 <div class="inner">
 
   <header class="major">
-    <h1>Lista de salas creadas</h1>
+    <h1>Salas en <%= @venue.name %></h1>
   </header>
 
   <form>
@@ -42,7 +42,7 @@
           <tr>
             <td><%= room.number %></td>
             <td><%= Venue.find(room.venue_id).name %></td>
-            <td><%= link_to 'Mostrar', room %></td>
+            <td><%= link_to 'Mostrar', room_courses_path(room) %></td>
             <% if current_user.administrator? %>
               <td><%= link_to 'Editar', edit_room_path(room) %></td>
             <% end %>

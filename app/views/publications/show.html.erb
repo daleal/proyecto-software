@@ -1,21 +1,14 @@
 <div class="inner">
 
-  <p>
-    <strong>Título:</strong>
-    <%= @publication.title %>
-  </p>
+  <header class="major">
+    <h1><%= @publication.title %></h1>
+  </header>
 
-  <p>
-    <strong>Descripción:</strong>
-    <%= @publication.description %>
-  </p>
+  <p><%= @publication.description %></p>
 
-  <p>
-    <strong>Fecha de creación:</strong>
-    <%= @publication.publication_date.strftime("%d/%m/%y: %H:%M:%S") %>
-  </p>
+  <br><br>
 
-  <%= link_to 'Comentarios', publication_comments_path(@publication) %>
+  <h2 id="content">Comentarios</h2>
 
   <%=
     if (@publication.created_by == current_user.id) || current_user.administrator?
@@ -23,6 +16,16 @@
     end
   %>
 
-  <%= link_to 'Volver', course_publications_path(@course) %>
+  <%=
+    render partial: "comments/comments", locals: {
+    comments: Comment.where(publication_id: @publication.id),
+    publication: @publication
+    }
+  %>
+
+  <ul class="actions">
+    <li><%= link_to 'Comentar', new_publication_comment_path(@publication), class: "button" %></li>
+    <li><%= link_to 'Volver', course_publications_path(@course), class: "button" %></li>
+  </ul>
 
 </div>
