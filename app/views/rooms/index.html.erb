@@ -17,7 +17,10 @@
   <form>
     <div class="row gtr-uniform">
       <div class="col-12">
-        <button type=”submit”>Quitar Filtro</button>
+        <ul class="actions">
+          <li><%= link_to 'Volver a la lista de campus', venues_path, class: "button primary" %></li>
+          <li><button type=”submit”>Quitar Filtro</button></li>
+        </ul>
       </div>
     </div>
   </form>

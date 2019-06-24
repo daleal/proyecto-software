@@ -18,7 +18,10 @@
   <form>
     <div class="row gtr-uniform">
       <div class="col-12">
-        <button type=”submit”>Quitar Filtro</button>
+        <ul class="actions">
+          <li><%= link_to "Volver a #{Venue.find(@room.venue_id).name}", venue_rooms_path(Venue.find(@room.venue_id)), class: "button primary" %></li>
+          <li><button type=”submit”>Quitar Filtro</button></li>
+        </ul>
       </div>
     </div>
   </form>

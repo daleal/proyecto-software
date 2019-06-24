@@ -1,7 +1,7 @@
 <div class="inner">
 
   <header class="major">
-    <h1>Convesación</h1>
+    <h1>Conversación</h1>
   </header>
 
   <div class="table-wrapper">
@@ -31,10 +31,10 @@
 
 
   <div class="col-12">
-    <ul class="actions">
-      <li><%= link_to 'Enviar Mensaje', new_conversation_message_path(@conversation), class: "button primary" %></li>
+    <ul class="actions stacked">
+      <li><%= link_to 'Enviar Nuevo Mensaje', new_conversation_message_path(@conversation), class: "button primary" %></li>
+      <li><%= link_to 'Volver a la bandeja de entrada', conversations_url, class: "button" %></li></li>
     </ul>
   </div>
 
 </div>
-
