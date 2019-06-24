@@ -8,25 +8,18 @@ class MessagesController < ApplicationController
     @messages = @conversation.messages
   end
 
-  def show
-  end
-
   def new
     @message = @conversation.messages.new
   end
 
   def create
     @message = @conversation.messages.new(message_params)
+    if @message.save
+      flash[:succes] = "El mensaje se ha enviado con éxito."
+    else
+      flash[:warning] = "No se ha podido enviar el mensaje."
+    end
     redirect_to conversation_messages_path(@conversation) if @message.save
-  end
-
-  def edit
-  end
-
-  def update
-  end
-
-  def destroy
   end
 
   private
