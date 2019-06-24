@@ -26,10 +26,8 @@
           <li><%= link_to 'Editar', edit_course_path(@course), class: "button primary" %></li>
         <% end %>
 
-        <li><%= link_to 'Volver', room_courses_path(@room), class: "button" %></li>
+        <li><%= link_to "Volver a #{@room.number}", room_courses_path(@room), class: "button" %></li>
       </ul>
-
-
 
     </div>
   </div>
