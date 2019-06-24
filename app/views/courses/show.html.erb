@@ -1,43 +1,39 @@
 <div class="inner">
 
-  <p>
-    <strong>Nombre:</strong>
-    <%= @course.name %>
-  </p>
+  <header class="major">
+    <h1><%= @course.initials %>: <%= @course.name %></h1>
+  </header>
 
-  <p>
-    <strong>Iniciales:</strong>
-    <%= @course.initials %>
-  </p>
+  <div class="row">
+    <div class="col-6 col-12-medium">
+      <ul>
+        <li>Profesor: <%= @course.teacher_name %></li>
+        <li>Sala: <%= Room.find(@course.room_id).number %></li>
+      </ul>
 
-  <p>
-    <strong>Nombre del Profesor:</strong>
-    <%= @course.teacher_name %>
-  </p>
+      <ul class="actions stacked">
+        <li><%= link_to 'Eventos', course_events_path(@course), class: "button" %></li>
 
-  <p>
-    <strong>Sala:</strong>
-    <%= Room.find(@course.room_id).number %>
-  </p>
+        <li><%= link_to 'Publicaciones', course_publications_path(@course), class: "button" %></li>
 
-  <%= link_to 'Eventos', course_events_path(@course) %>
+        <% if current_user.administrator? || @is_moderator %>
+          <li><%= link_to 'Revisar solicitudes de moderador', course_moderator_requests_path(@course), class: "button primary" %></li>
+        <% else %>
+          <li><%= link_to 'Solicitar ser moderador', new_course_moderator_request_path(@course, @is_moderator), class: "button primary" %></li>
+        <% end %>
 
-  <%= link_to 'Publicaciones', course_publications_path(@course) %>
+        <% if current_user.administrator? %>
+          <li><%= link_to 'Editar', edit_course_path(@course), class: "button primary" %></li>
+        <% end %>
 
-  <%=
-    if current_user.administrator? || @is_moderator
-      link_to 'Revisar solicitudes de moderador', course_moderator_requests_path(@course)
-    else
-      link_to 'Solicitar ser moderador', new_course_moderator_request_path(@course, @is_moderator)
-    end
-  %>
+        <li><%= link_to 'Volver', room_courses_path(@room), class: "button" %></li>
+      </ul>
 
-  <%=
-    if current_user.administrator?
-      link_to 'Editar', edit_course_path(@course)
-    end
-  %>
 
-  <%= link_to 'Volver', room_courses_path(@room) %>
+
+    </div>
+  </div>
+
+
 
 </div>
