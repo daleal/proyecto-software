@@ -65,7 +65,7 @@ class ModeratorRequestsController < ApplicationController
   def access
     @moderator_request = ModeratorRequest.find(params[:id])
 
-    moderator = ModeratorRequest.where(course_id: @course.id, user_id: current_user.id).first
+    moderator = ModeratorRequest.where(course_id: params[:course_id], user_id: current_user.id).first
     @is_moderator = !moderator.nil? && moderator.accepted?
     unless (@moderator_request.user_id == current_user.id) || \
            current_user.administrator? || @is_moderator
