@@ -5,7 +5,7 @@ class VenuesController < ApplicationController
   def index
     @q = params[:q]
     if @q
-      @venues = Venue.where(name: @q)
+      @venues = Venue.includes_substring("name", @q)
     else
       @venues = Venue.all
     end

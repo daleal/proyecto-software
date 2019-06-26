@@ -10,7 +10,7 @@ class PublicationsController < ApplicationController
     @q = params[:q]
 
     if @q
-      @publications = Publication.where(title: @q) + Publication.where(description: @q)
+      @publications = Publication.includes_substring("title", @q) | Publication.includes_substring("description", @q)
     else
       @publications = Publication.all
     end

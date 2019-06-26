@@ -38,7 +38,7 @@ class CommentsController < ApplicationController
     else
       flash[:warning] = "No se ha podido crear el comentario."
     end
-    redirect_to publication_comments_path(@publication)
+    redirect_to @publication
   end
 
   def edit
@@ -54,7 +54,7 @@ class CommentsController < ApplicationController
     else
       flash[:warning] = "No se ha podido editar el comentario."
     end
-    redirect_to publication_comments_path(@publication)
+    redirect_to @publication
   end
 
   def destroy
@@ -62,19 +62,19 @@ class CommentsController < ApplicationController
     @publication = Publication.find(@comment.publication_id)
     @comment.destroy
     flash[:success] = "Se ha eliminado el comentario correctamente."
-    redirect_to publication_comments_path(@publication)
+    redirect_to @publication
   end
 
   # from user
   def upvote
     @comment.upvote_from current_user
-    redirect_to publication_comments_path(@publication)
+    redirect_to @publication
   end
 
   # from user
   def downvote
     @comment.downvote_from current_user
-    redirect_to publication_comments_path(@publication)
+    redirect_to @publication
   end
 
   private
@@ -101,7 +101,7 @@ class CommentsController < ApplicationController
     unless (@publication.created_by == current_user.id) || \
            current_user.administrator? || @is_moderator
       flash[:warning] = "No tienes permiso para ejecutar esta acción."
-      redirect_to publication_comments_path(@publication)
+      redirect_to @publication
     end
   end
 

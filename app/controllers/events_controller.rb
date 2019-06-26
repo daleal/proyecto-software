@@ -4,9 +4,9 @@ class EventsController < ApplicationController
 
   def catalog
     @q = params[:q]
-    
+
     if @q
-      @events = Event.where(category: @q) + Course.where(description: @q)
+      @events = Event.includes_substring("category", @q) | Event.includes_substring("description", @q)
     else
       @events = Event.all
     end

@@ -4,10 +4,10 @@ class CoursesController < ApplicationController
 
   def catalog
     @q = params[:q]
-    
+
     if @q
-      @courses = Course.where(room_id: @q) + Course.where(name: @q) + Course.where(initials: @q) + 
-      Course.where(teacher_name: @q)
+      @courses = Course.where(room_id: @q) | Course.includes_substring("name", @q) | Course.includes_substring("initials", @q) |
+      Course.includes_substring("teacher_name", @q)
     else
       @courses = Course.all
     end
@@ -16,9 +16,9 @@ class CoursesController < ApplicationController
   def index
     @room = Room.find(params[:room_id])
     @q = params[:q]
-    
+
     if @q
-      @courses = Course.where(room_id: params[:room_id], name: @q) + Course.where(room_id: params[:room_id], initials: @q) + 
+      @courses = Course.where(room_id: params[:room_id], name: @q) + Course.where(room_id: params[:room_id], initials: @q) +
       Course.where(room_id: params[:room_id], teacher_name: @q)
     else
       @courses = Course.where(room_id: params[:room_id])

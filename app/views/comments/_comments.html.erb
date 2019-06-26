@@ -1,0 +1,29 @@
+<% comments.each do |comment| %>
+
+  <div class="box">
+    <%= comment.content %>
+    <br>
+    <strong>
+      <% if comment.created_by == current_user.id %>
+        Tú
+      <% else %>
+        <%= User.find(comment.created_by).email %>
+      <% end %>
+      - <%= comment.comment_date.strftime("%d del %m del %Y a las %H:%M") %>
+    </strong>
+    <br>
+    (<strong><%= comment.get_upvotes.size %></strong> likes,
+    <strong><%= comment.get_downvotes.size %></strong> dislikes)
+
+    <ul class="icons">
+      <li><%= link_to "", like_comment_path(comment), class: "icon brands fa-thumbs-o-up", method: :put %></li>
+      <li><%= link_to "", dislike_comment_path(comment), class: "icon brands fa-thumbs-o-down", method: :put %></li>
+      <% if comment.created_by == current_user.id || current_user.administrator? || @is_moderator %>
+        <li><%= link_to "", edit_comment_path(comment), class: "icon brands fa-pencil" %></li>
+        <li><%= link_to "", comment, method: :delete, data: { confirm: '¿Seguro que deseas eliminar el comentario?' }, class: "icon brands fa-trash" %></li>
+      <% end %>
+    </ul>
+
+  </div>
+
+<% end %>

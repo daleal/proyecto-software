@@ -44,7 +44,7 @@
             <td><%= venue.name %></td>
             <td><%= venue.address %></td>
             <td><%= venue.description %></td>
-            <td><%= link_to 'Mostrar', venue %></td>
+            <td><%= link_to 'Mostrar', venue_rooms_path(venue) %></td>
             <% if current_user.administrator? %>
               <td><%= link_to 'Editar', edit_venue_path(venue) %></td>
             <% end %>

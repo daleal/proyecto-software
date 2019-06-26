@@ -7,25 +7,15 @@ class ConversationsController < ApplicationController
     @users = User.all
   end
 
-  def show
-  end
-
-  def new
-  end
-
   def create
     matches = Conversation.between(params[:sender_id], params[:recipient_id])
     @conversation = if matches.present? then matches.first else Conversation.create!(conversation_params) end
+    if @conversation.save
+      flash[:succes] = "La conversación se ha creado con éxito."
+    else
+      flash[:warning] = "No se ha podido crear la conversación."
+    end
     redirect_to conversation_messages_path(@conversation)
-  end
-
-  def edit
-  end
-
-  def update
-  end
-
-  def destroy
   end
 
   private

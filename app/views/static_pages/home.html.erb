@@ -17,18 +17,20 @@
 <div id="main">
   <!-- One -->
     <section id="one" class="tiles">
+      <% if user_signed_in? %>
+        <article>
+          <span class="image">
+            <%= image_tag("envelope.jpg") %>
+          </span>
+          <header class="major">
+            <h3><%= link_to "Mensajería", conversations_url, class: "link" %></h3>
+            <p><b>Conéctate</b> con todos los usuarios registrados de la plataforma.</p>
+          </header>
+        </article>
+      <% end %>
       <article>
         <span class="image">
-          <%= image_tag("pic01.jpg") %>
-        </span>
-        <header class="major">
-          <h3><%= link_to "Mensajería", conversations_url, class: "link" %></h3>
-          <p><b>Conéctate</b> con todos los usuarios registrados de la plataforma.</p>
-        </header>
-      </article>
-      <article>
-        <span class="image">
-          <%= image_tag("pic01.jpg") %>
+          <%= image_tag("people.jpg") %>
         </span>
         <header class="major">
           <h3><%= link_to "Campuses", venues_url, class: "link" %></h3>
@@ -37,7 +39,7 @@
       </article>
       <article>
         <span class="image">
-          <%= image_tag("pic02.jpg") %>
+          <%= image_tag("study-room.jpg") %>
         </span>
         <header class="major">
           <h3><%= link_to "Salas de Estudio", rooms_catalog_url, class: "link" %></h3>
@@ -46,7 +48,7 @@
       </article>
       <article>
         <span class="image">
-          <%= image_tag("pic03.jpg") %>
+          <%= image_tag("book.jpg") %>
         </span>
         <header class="major">
 
@@ -58,7 +60,7 @@
       </article>
       <article>
         <span class="image">
-          <%= image_tag("pic04.jpg") %>
+          <%= image_tag("event.jpeg") %>
         </span>
         <header class="major">
           <h3><%= link_to "Eventos", events_catalog_url, class: "link" %></h3>
@@ -67,39 +69,31 @@
       </article>
       <article>
         <span class="image">
-          <%= image_tag("pic05.jpg") %>
+          <%= image_tag("hands-on-keyboard.jpg") %>
         </span>
         <header class="major">
           <h3><%= link_to "Publicaciones", publications_catalog_url, class: "link" %></h3>
-          <p><b>Descubre</b> todas las publicaciones acerca de los más variados temas.</p>
+          <p><b>Encuentra</b> todas las publicaciones acerca de los más variados temas.</p>
         </header>
       </article>
       <article>
         <span class="image">
-          <%= image_tag("pic06.jpg") %>
+          <% if user_signed_in? %>
+            <%= image_tag("cogs.jpg") %>
+          <% else %>
+            <%= image_tag("students-hug.jpg") %>
+          <% end %>
         </span>
         <header class="major">
           <% if user_signed_in? %>
             <h3><%= link_to "Editar Perfil", edit_user_registration_path, class: "link" %></h3>
+            <p><b>Modifica</b> tu información personal</p>
           <% else %>
             <h3><%= link_to "Regístrate!", new_user_registration_url, class: "link" %></h3>
+            <p>¿Quieres ser ultra seco? <b>Únete a nuestra comunidad</b>.</p>
           <% end %>
-          <p>¿Quieres ser ultra seco? Únete a nuestra comunidad.</p>
         </header>
       </article>
     </section>
-
-  <!-- Two
-    <section id="two">
-      <div class="inner">
-        <header class="major">
-          <h2>Massa libero</h2>
-        </header>
-        <p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet pharetra et feugiat tempus.</p>
-        <ul class="actions">
-          <li><a href="landing.html" class="button next">Get Started</a></li>
-        </ul>
-      </div>
-    </section> -->
 
 </div>

@@ -1,6 +1,6 @@
 # Grupo 28
 
-[https://salty-citadel-84152.herokuapp.com/](https://salty-citadel-84152.herokuapp.com/)
+[https://somossecos.herokuapp.com/](https://somossecos.herokuapp.com/)
 
 ## Running Rubocop
 
