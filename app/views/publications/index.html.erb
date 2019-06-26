@@ -1,8 +1,9 @@
 <div class="inner">
 
   <header class="major">
-    <h1>Lista de Publicaciones</h1>
+    <h1>Publicaciones</h1>
   </header>
+  <h2><%= @course.initials %>: <%= @course.name %></h2>
 
   <form>
     <div class="row gtr-uniform">
@@ -17,9 +18,9 @@
   <form>
     <div class="row gtr-uniform">
       <div class="col-12">
-        <ul class="actions">
-          <li><%= link_to "Volver a #{@course.initials}", @course, class: "button primary" %></li>
+        <ul class="actions stacked">
           <li><button type=”submit”>Quitar Filtro</button></li>
+          <li><%= link_to "Volver a #{@course.initials}", @course, class: "button primary" %></li>
         </ul>
       </div>
     </div>
@@ -69,8 +70,6 @@
 
   </div>
 
-  <br>
-
-  <%= link_to 'Crear nueva', new_course_publication_path(@course) %>
+  <%= link_to 'Crear nueva', new_course_publication_path(@course), class: "button primary" %>
 
 </div>

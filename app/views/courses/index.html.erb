@@ -2,8 +2,9 @@
 
 
   <header class="major">
-    <h1>Ramos en la sala <%= @room.number %></h1>
+    <h1>Sala <%= @room.number %></h1>
   </header>
+  <h2>Ramos Disponibles</h2>
 
   <form>
     <div class="row gtr-uniform">
@@ -18,9 +19,9 @@
   <form>
     <div class="row gtr-uniform">
       <div class="col-12">
-        <ul class="actions">
-          <li><%= link_to "Volver a #{Venue.find(@room.venue_id).name}", venue_rooms_path(Venue.find(@room.venue_id)), class: "button primary" %></li>
+        <ul class="actions stacked">
           <li><button type=”submit”>Quitar Filtro</button></li>
+          <li><%= link_to "Volver a #{Venue.find(@room.venue_id).name}", venue_rooms_path(Venue.find(@room.venue_id)), class: "button primary" %></li>
         </ul>
       </div>
     </div>
@@ -66,11 +67,9 @@
 
   </div>
 
-  <br>
-
   <%=
     if current_user.administrator?
-      link_to 'Crear nuevo', new_room_course_path(@room)
+      link_to 'Crear nuevo', new_room_course_path(@room), class: "button primary"
     end
   %>
 

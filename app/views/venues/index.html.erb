@@ -1,7 +1,7 @@
 <div class="inner">
 
   <header class="major">
-    <h1>Lista de todos los campus</h1>
+    <h1>Lista de campus</h1>
   </header>
 
   <form>
@@ -58,11 +58,9 @@
 
   </div>
 
-  <br>
-
   <%=
     if current_user.administrator?
-      link_to 'Crear nuevo', new_venue_path
+      link_to 'Crear nuevo', new_venue_path, class: "button primary"
     end
   %>
 

@@ -1,54 +1,48 @@
-<p>
-  <strong>Categoría:</strong>
-  <%= @event.category %>
-</p>
 <div class="inner">
 
+  <header class="major">
+    <h1><%= @event.category %></h1>
+  </header>
+  <h2><%= Course.find(@event.course_id).initials %>: <%= Course.find(@event.course_id).name %></h2>
+
   <p>
-    <strong>Descripción:</strong>
-    <%= @event.description %>
+    <%= @event.description %> <br>
+    <strong><%= User.find(@event.created_by).email %></strong>
   </p>
 
   <p>
-    <strong>Ramo:</strong>
-    <%= Course.find(@event.course_id).name %>
-  </p>
-
-  <p>
-    <strong>Creado por: </strong><%= User.find(@event.created_by).email %>
-  </p>
-
-  <p>
-    <strong>Integrantes:</strong>
-    <% @event.users.each do |user|%>
-      <%= user.email %>
+    <% if @event.users.any? %>
+      <h3>Participarán del evento:</h3>
+      <ul>
+        <% @event.users.each do |user|%>
+          <li><%= user.email %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <strong>Nadie está inscrito para participar en este evento!</strong>
     <% end %>
   </p>
 
-  <%=
-    if (@event.created_by == current_user.id) || current_user.administrator?
-      link_to 'Editar', edit_event_path(@event)
-    end
-  %>
+  <ul class="actions stacked">
+    <% not_joined = true
+      @event.users.each do |user|
+        if (current_user.id == user.id)
+          then not_joined = false
+        end
+      end %>
+    <% if (@event.created_by != current_user.id && not_joined) %>
+      <li><%= link_to 'Unirme!', event_join_path(@event), class: "button primary" %></li>
+    <% end %>
 
-  <%=
-    not_joined = true
-    @event.users.each do |user|
-      if (current_user.id == user.id)
-        then not_joined = false
-      end
-    end
-    if (@event.created_by != current_user.email && not_joined) || current_user.administrator?
-      link_to 'Unirme', event_join_path(@event)
-    end
-  %>
+    <% if (@event.created_by != current_user.id && !not_joined) %>
+      <li><%= link_to 'Salirme', event_leave_path(@event), class: "button primary" %></li>
+    <% end %>
 
-  <%=
-    if (@event.created_by != current_user.email && !not_joined) || current_user.administrator?
-      link_to 'Salirme', event_leave_path(@event)
-    end
-  %>
+    <% if (@event.created_by == current_user.id) || current_user.administrator? %>
+      <li><%= link_to 'Editar', edit_event_path(@event), class: "button primary" %></li>
+    <% end %>
 
-  <%= link_to 'Volver', course_events_path(@course) %>
+    <li><%= link_to 'Volver', course_events_path(@course), class: "button" %></li>
+  </ul>
 
 </div>

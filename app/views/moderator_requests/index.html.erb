@@ -1,8 +1,9 @@
 <div class="inner">
 
   <header class="major">
-    <h1><%= "Lista de solicitudes del curso #{@course.initials}: #{@course.name}" %></h1>
+    <h1>Solicitudes Moderación</h1>
   </header>
+  <h2><%= @course.initials %>: <%= @course.name %></h2>
 
   <div class="table-wrapper">
 
@@ -45,10 +46,11 @@
 
   <br>
 
-  <%=
-    if !current_user.administrator? && !@is_moderator
-      link_to 'Crear nueva', new_course_moderator_request_path
-    end
-  %>
+  <ul class="actions stacked">
+    <% if !current_user.administrator? || !@is_moderator %>
+      <li><%= link_to 'Crear nueva', new_course_moderator_request_path, class: "button primary" %></li>
+    <% end %>
+    <li><%= link_to "Volver a #{@course.initials}", @course, class: "button" %></li>
+  </ul>
 
 </div>

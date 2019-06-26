@@ -81,12 +81,13 @@ class EventsController < ApplicationController
     @course = Course.find(@event.course_id)
     @event.users.push(current_user)
     if @event.save
-      flash[:success] = "Te has unido al evento "\
-                        "#{@event.category} correctamente."
+      flash[:success] = "Te has unido al evento " \
+                        "#{@event.category} de " \
+                        "#{User.find(@event.created_by).email} correctamente."
     else
       flash[:warning] = "No te has podido unir evento."
     end
-    redirect_to course_events_path(@course)
+    redirect_to @event
   end
 
   def leave
@@ -94,12 +95,13 @@ class EventsController < ApplicationController
     @course = Course.find(@event.course_id)
     @event.users.delete(current_user)
     if @event.save
-      flash[:success] = "Has dejado el evento "\
-                        "#{@event.category} correctamente."
+      flash[:success] = "Has dejado el evento " \
+                        "#{@event.category} de " \
+                        "#{User.find(@event.created_by).email} correctamente."
     else
       flash[:warning] = "No has podido dejar evento."
     end
-    redirect_to course_events_path(@course)
+    redirect_to @event
   end
 
   private
