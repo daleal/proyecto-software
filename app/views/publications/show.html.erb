@@ -9,14 +9,28 @@
 
   <br><br>
 
-  <h2 id="content">Comentarios</h2>
+  <% comments = Comment.where(publication_id: @publication.id) %>
+  <% unless comments.empty?%>
+    <h2>Comentarios</h2>
+
+    <%=
+      render partial: "comments/comments", locals: {
+        comments: Comment.where(publication_id: @publication.id),
+        publication: @publication
+      }
+    %>
+  <% end %>
+
+  <h2>Deja un comentario!</h2>
 
   <%=
-    render partial: "comments/comments", locals: {
-    comments: Comment.where(publication_id: @publication.id),
-    publication: @publication
+    render partial: "comments/add_comment", locals: {
+      publication: @publication,
+      comment: Comment.new
     }
   %>
+
+  <br><br>
 
   <% if (@publication.created_by == current_user.id) || current_user.administrator? %>
     <ul class="actions">
@@ -25,7 +39,6 @@
   <% end %>
 
   <ul class="actions">
-    <li><%= link_to 'Comentar', new_publication_comment_path(@publication), class: "button" %></li>
     <li><%= link_to 'Volver', course_publications_path(@course), class: "button" %></li>
   </ul>
 

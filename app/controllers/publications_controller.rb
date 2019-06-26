@@ -52,11 +52,11 @@ class PublicationsController < ApplicationController
     if @publication.save
       flash[:success] = "Se ha creado una publicación con el título "\
                         "#{@publication.title} correctamente."
+      redirect_to @publication
     else
       flash[:warning] = "No se ha podido crear la publicación."
+      redirect_to course_publications_path(@course)
     end
-
-    redirect_to course_publications_path(@course)
   end
 
   def edit
@@ -73,7 +73,7 @@ class PublicationsController < ApplicationController
     else
       flash[:warning] = "No se ha podido editar la publicación."
     end
-    redirect_to course_publications_path(@course)
+    redirect_to @publication
   end
 
   def destroy

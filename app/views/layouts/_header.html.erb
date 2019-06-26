@@ -22,7 +22,11 @@
   </ul>
   <ul class="actions stacked">
     <% if user_signed_in? %>
-      <li><%= link_to "Editar Perfil", edit_user_registration_path, class: "button primary fit" %></li>
+      <% local = current_user.email.split("@")[0] %>
+      <% if local.length > 15 %>
+        <% local = local[0..13] + "..." %>
+      <% end %>
+      <li><%= link_to "Perfil (#{local})", edit_user_registration_path, class: "button primary fit" %></li>
       <li><%= link_to "Cerrar Sesión", destroy_user_session_path, class: "button fit" %></li>
     <% else %>
       <li><%= link_to "Regístrate!", new_user_registration_url, class: "button primary fit" %></li>
