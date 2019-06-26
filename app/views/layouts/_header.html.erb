@@ -11,7 +11,9 @@
 <nav id="menu">
   <ul class="links">
     <li><%= link_to "Inicio", root_url %></li>
-    <li><%= link_to "Mensajería", conversations_url %></li>
+    <% if user_signed_in? %>
+      <li><%= link_to "Mensajería", conversations_url %></li>
+    <% end %>
     <li><%= link_to "Campuses", venues_url %></li>
     <li><%= link_to "Salas de Estudio", rooms_catalog_url %></li>
     <li><%= link_to "Ramos", courses_catalog_url %></li>
