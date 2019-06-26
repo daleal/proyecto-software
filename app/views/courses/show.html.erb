@@ -1,29 +1,30 @@
 <div class="inner">
 
   <header class="major">
-    <h1><%= @course.initials %>: <%= @course.name %></h1>
+    <h1><%= @course.initials %></h1>
   </header>
+  <h2><%= @course.name %></h2>
 
   <div class="row">
-    <div class="col-6 col-12-medium">
-      <ul>
-        <li>Profesor: <%= @course.teacher_name %></li>
-        <li>Sala: <%= Room.find(@course.room_id).number %></li>
-      </ul>
+    <div class="col-12">
+      <p>
+        <strong>Profesor</strong>: <%= @course.teacher_name %> <br>
+        <strong>Sala</strong>: <%= Room.find(@course.room_id).number %>
+      </p>
 
       <ul class="actions stacked">
-        <li><%= link_to 'Eventos', course_events_path(@course), class: "button" %></li>
+        <li><%= link_to 'Eventos', course_events_path(@course), class: "button primary" %></li>
 
-        <li><%= link_to 'Publicaciones', course_publications_path(@course), class: "button" %></li>
+        <li><%= link_to 'Publicaciones', course_publications_path(@course), class: "button primary" %></li>
 
         <% if current_user.administrator? || @is_moderator %>
-          <li><%= link_to 'Revisar solicitudes de moderador', course_moderator_requests_path(@course), class: "button primary" %></li>
+          <li><%= link_to 'Solicitudes de moderador', course_moderator_requests_path(@course), class: "button primary" %></li>
         <% else %>
           <li><%= link_to 'Solicitar ser moderador', new_course_moderator_request_path(@course, @is_moderator), class: "button primary" %></li>
         <% end %>
 
         <% if current_user.administrator? %>
-          <li><%= link_to 'Editar', edit_course_path(@course), class: "button primary" %></li>
+          <li><%= link_to 'Editar', edit_course_path(@course), class: "button" %></li>
         <% end %>
 
         <li><%= link_to "Volver a #{@room.number}", room_courses_path(@room), class: "button" %></li>

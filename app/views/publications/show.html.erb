@@ -1,8 +1,9 @@
 <div class="inner">
 
   <header class="major">
-    <h1><%= @publication.title %></h1>
+    <h1>Publicación</h1>
   </header>
+  <h2><%= @publication.title %></h2>
 
   <p><%= @publication.description %></p>
 
@@ -11,17 +12,17 @@
   <h2 id="content">Comentarios</h2>
 
   <%=
-    if (@publication.created_by == current_user.id) || current_user.administrator?
-      link_to 'Editar', edit_publication_path(@publication)
-    end
-  %>
-
-  <%=
     render partial: "comments/comments", locals: {
     comments: Comment.where(publication_id: @publication.id),
     publication: @publication
     }
   %>
+
+  <% if (@publication.created_by == current_user.id) || current_user.administrator? %>
+    <ul class="actions">
+      <li><%= link_to 'Editar Publicación', edit_publication_path(@publication), class: "button primary" %></li>
+    </ul>
+  <% end %>
 
   <ul class="actions">
     <li><%= link_to 'Comentar', new_publication_comment_path(@publication), class: "button" %></li>

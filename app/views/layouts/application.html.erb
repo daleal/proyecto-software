@@ -26,11 +26,17 @@
 
       <% flash.each do |message_type, message| %>
         <% if notice %>
-          <p class="alert alert-success"><%= notice %></p>
+          <% unless notice.blank? %>
+            <p class="alert alert-success"><%= notice %></p>
+          <% end %>
         <% elsif alert %>
-          <p class="alert alert-danger"><%= alert %></p>
+          <% unless alert.blank? %>
+            <p class="alert alert-danger"><%= alert %></p>
+          <% end %>
         <% else %>
-          <div class="alert alert-<%= message_type %>"><%= message %></div>
+          <% unless message.blank? %>
+            <div class="alert alert-<%= message_type %>"><%= message %></div>
+          <% end %>
         <% end %>
       <% end %>
 

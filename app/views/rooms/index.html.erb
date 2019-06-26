@@ -1,8 +1,9 @@
 <div class="inner">
 
   <header class="major">
-    <h1>Salas en <%= @venue.name %></h1>
+    <h1><%= @venue.name %></h1>
   </header>
+  <h2>Salas Disponibles</h2>
 
   <form>
     <div class="row gtr-uniform">
@@ -16,10 +17,10 @@
   </form>
   <form>
     <div class="row gtr-uniform">
-      <div class="col-12">
-        <ul class="actions">
-          <li><%= link_to 'Volver a la lista de campus', venues_path, class: "button primary" %></li>
+      <div class="col-6 col-12-medium">
+        <ul class="actions stacked">
           <li><button type=”submit”>Quitar Filtro</button></li>
+          <li><%= link_to 'Volver a la lista de campus', venues_path, class: "button primary" %></li>
         </ul>
       </div>
     </div>
@@ -63,7 +64,7 @@
 
   <%=
     if current_user.administrator?
-      link_to 'Crear nuevo', new_venue_room_path(@venue)
+      link_to 'Crear nueva', new_venue_room_path(@venue), class: "button primary"
     end
   %>
 

@@ -15,7 +15,7 @@ class MessagesController < ApplicationController
   def create
     @message = @conversation.messages.new(message_params)
     if @message.save
-      flash[:succes] = "El mensaje se ha enviado con éxito."
+      flash[:success] = "El mensaje se ha enviado con éxito."
     else
       flash[:warning] = "No se ha podido enviar el mensaje."
     end
