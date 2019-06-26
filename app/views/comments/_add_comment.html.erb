@@ -1,0 +1,17 @@
+<%= form_for [publication, comment] do |f| %>
+
+  <div class="row gtr-uniform">
+
+    <div class="col-12">
+      <%= f.text_area :content, placeholder: 'Contenido' %>
+    </div>
+
+    <div class="col-12">
+      <ul class="actions">
+        <li><%= f.submit "Comentar" %></li>
+      </ul>
+    </div>
+
+  </div>
+
+<% end %>
