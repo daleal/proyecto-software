@@ -33,7 +33,9 @@ class CommentsController < ApplicationController
     comment_data[:created_by] = current_user.id
     @publication = Publication.find(params[:publication_id])
     @comment = @publication.comments.new(comment_data)
-    if @comment.save
+    if @comment.content.to_s.strip.empty?
+      flash[:warning] = "Se requiere contenido en el comentario."
+    elsif @comment.save
       flash[:success] = "Se ha creado el comentario correctamente."
     else
       flash[:warning] = "No se ha podido crear el comentario."
